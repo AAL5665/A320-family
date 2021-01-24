@@ -500,47 +500,6 @@
 		</emission>
 	</animation>
 
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood-upper</inherits-from>
-		<object-name>throttle_1</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood-atc</inherits-from>
-		<object-name>atc_glare</object-name>
-		<object-name>atc_body</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood-engine</inherits-from>
-		<object-name>engine_body</object-name>
-		<object-name>engine_glare</object-name>
-		<object-name>eng_mode</object-name>
-		<object-name>Lcutoff</object-name>
-		<object-name>Rcutoff</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/brightness-panel-ped</inherits-from>
-		<object-name>vu111_body</object-name>
-		<object-name>vu112_body</object-name>
-		<object-name>vu111_glare</object-name>
-		<object-name>vu112_glare</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/dummy-gap</inherits-from>
-		<object-name>dummy_1</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood-radar</inherits-from>
-		<object-name>radar_mode</object-name>
-		<object-name>radar_tilt</object-name>
-		<object-name>radar_body</object-name>
-		<object-name>radar_glare</object-name>
-	</effect>
-
 	<animation>
 		<type>select</type>
 		<object-name>engine_fault_1</object-name>
@@ -7306,37 +7265,7 @@
 		<object-name>brightness_panel_left_glare</object-name>
 		<object-name>brightness_panel_right_glare</object-name>
 	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood</inherits-from>
-		<object-name>pedestal_low</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood-glare</inherits-from>
-		<object-name>pedestal_low_glare</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/thr-quad-flood</inherits-from>
-		<object-name>thr_quad</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/rudder-trim</inherits-from>
-		<object-name>RudderTrim</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/park-brk</inherits-from>
-		<object-name>ParkBrk</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/gravity-gear</inherits-from>
-		<object-name>gravity_gear</object-name>
-	</effect>
-
+	
 	<effect>
 		<inherits-from>Aircraft/A320-family/Models/Effects/panel-flood-glare</inherits-from>
 		<object-name>main_panel_signboard</object-name>
@@ -7345,21 +7274,6 @@
 	<effect>
 		<inherits-from>Aircraft/A320-family/Models/Effects/panel-flood-glare-right</inherits-from>
 		<object-name>gear_labels</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-footrest</inherits-from>
-		<object-name>ped_footrest</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood-flap</inherits-from>
-		<object-name>FlapsLever</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/pedestal-flood-spdbrk</inherits-from>
-		<object-name>SpdBrk</object-name>
 	</effect>
 
 <!--	<effect>-->
@@ -7778,6 +7692,32 @@
 		<object-name>flood_lt_ped</object-name>
 		<object-name>radar_gain</object-name>
 		<object-name>throttle_1_label</object-name>
+		<object-name>vu111_body</object-name>
+		<object-name>vu112_body</object-name>
+		<object-name>vu111_glare</object-name>
+		<object-name>vu112_glare</object-name>
+		<object-name>radar_mode</object-name>
+		<object-name>radar_tilt</object-name>
+		<object-name>radar_body</object-name>
+		<object-name>radar_glare</object-name>
+		<object-name>dummy_1</object-name>
+		<object-name>engine_body</object-name>
+		<object-name>engine_glare</object-name>
+		<object-name>eng_mode</object-name>
+		<object-name>Lcutoff</object-name>
+		<object-name>Rcutoff</object-name>
+		<object-name>throttle_1</object-name>
+		<object-name>atc_glare</object-name>
+		<object-name>atc_body</object-name>
+		<object-name>pedestal_low</object-name>
+		<object-name>pedestal_low_glare</object-name>
+		<object-name>thr_quad</object-name>
+		<object-name>RudderTrim</object-name>
+		<object-name>ParkBrk</object-name>
+		<object-name>gravity_gear</object-name>
+		<object-name>ped_footrest</object-name>
+		<object-name>FlapsLever</object-name>
+		<object-name>SpdBrk</object-name>
 	</effect>
 	
 	<!-- Panels that are vertical -->
@@ -9109,5 +9049,47 @@
 			<z>0</z>
 		</axis>
 	</animation>
+	
+	<light>
+		<name>Pedestal Light</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/pedestal-light</property></dim-factor>
+		<position>
+			<x-m>0.510226</x-m>
+			<y-m>-0.000203</y-m>
+			<z-m>1.10204</z-m>
+		</position>
+		<direction>
+			<x>-0.259</x>
+			<y>0</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.5</r>
+			<g>0.5</g>
+			<b>0.5</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>0.45</l>
+			<q>0.75</q>
+		</attenuation>
+		<spot-exponent>100.0</spot-exponent>
+		<spot-cutoff>25.0</spot-cutoff>
+		<range-m>10.0</range-m>
+	</light>
 
 </PropertyList>
