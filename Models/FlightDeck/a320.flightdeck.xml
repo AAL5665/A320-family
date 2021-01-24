@@ -9060,7 +9060,7 @@
 			<z-m>1.10204</z-m>
 		</position>
 		<direction>
-			<x>-0.259</x>
+			<x>-0.20442584764</x>
 			<y>0</y>
 			<z>-1</z>
 		</direction>
@@ -9091,5 +9091,140 @@
 		<spot-cutoff>25.0</spot-cutoff>
 		<range-m>10.0</range-m>
 	</light>
-
+	
+	<animation>
+		<type>knob</type>
+        <object-name>readingLightLeft</object-name>
+        <property>/controls/lighting/reading-light-left-knb</property>
+		<factor>180</factor>
+		<offset-deg>-90</offset-deg>
+        <axis>
+			<x1-m>0.722935</x1-m>
+			<y1-m>-0.210543</y1-m>
+			<z1-m>1.18627</z1-m>
+			<x2-m>0.716082</x2-m>
+			<y2-m>-0.210578</y2-m>
+			<z2-m>1.20481</z2-m>
+		</axis>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>/controls/lighting/reading-light-left-knb</property>
+                <factor>0.05</factor>
+                <min>0</min>
+                <max>1</max>                
+                <wrap>false</wrap>
+            </binding>
+        </action>
+	</animation>
+	
+	<light>
+		<name>Left Overhead Reading Light</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/reading-light-left</property></dim-factor>
+		<position>
+			<x-m>0.71802</x-m>
+			<y-m>-0.272788</y-m>
+			<z-m>1.19352</z-m>
+		</position>
+		<direction>
+			<x>-0.22850161172</x>
+			<y>-0.2</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.5</r>
+			<g>0.5</g>
+			<b>0.5</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>0.45</l>
+			<q>0.75</q>
+		</attenuation>
+		<spot-exponent>100.0</spot-exponent>
+		<spot-cutoff>25.0</spot-cutoff>
+		<range-m>10.0</range-m>
+	</light>
+	
+	<animation>
+		<type>knob</type>
+        <object-name>readingLightRight</object-name>
+        <property>/controls/lighting/reading-light-right-knb</property>
+		<factor>180</factor>
+		<offset-deg>-90</offset-deg>
+        <axis>
+			<x1-m>0.591399</x1-m>
+			<y1-m>0.282751</y1-m>
+			<z1-m>1.13594</z1-m>
+			<x2-m>0.584543</x2-m>
+			<y2-m>0.282715</y2-m>
+			<z2-m>1.15449</z2-m>
+		</axis>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>/controls/lighting/reading-light-right-knb</property>
+                <factor>0.05</factor>
+                <min>0</min>
+                <max>1</max>                
+                <wrap>false</wrap>
+            </binding>
+        </action>
+	</animation>
+	
+	<light>
+		<name>Right Overhead Reading Light</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/reading-light-right</property></dim-factor>
+		<position>
+			<x-m>0.586497</x-m>
+			<y-m>0.220913</y-m>
+			<z-m>1.1432</z-m>
+		</position>
+		<direction>
+			<x>-0.22850161172</x>
+			<y>0.2</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.5</r>
+			<g>0.5</g>
+			<b>0.5</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>0.45</l>
+			<q>0.75</q>
+		</attenuation>
+		<spot-exponent>100.0</spot-exponent>
+		<spot-cutoff>25.0</spot-cutoff>
+		<range-m>10.0</range-m>
+	</light>
 </PropertyList>

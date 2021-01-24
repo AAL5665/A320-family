@@ -5,9 +5,17 @@
 <system name="A320: Lights">
 
 	<channel name="Interior Lights" execrate="8">
-		<switch name="/controls/lighting/reading-light-tied">
+	
+		<switch name="/controls/lighting/reading-light-left">
 			<default value="0" />
-			<test value="/controls/lighting/main-flood-knb">
+			<test value="/controls/lighting/reading-light-left-knb">
+				/systems/electrical/bus/dc-1 gt 25
+			</test>
+		</switch>
+		
+		<switch name="/controls/lighting/reading-light-right">
+			<default value="0" />
+			<test value="/controls/lighting/reading-light-right-knb">
 				/systems/electrical/bus/dc-1 gt 25
 			</test>
 		</switch>
@@ -20,7 +28,7 @@
 			</test>
 		</switch>
 		
-		<switch name="/controls/lighting/pedestal-light-tied">
+		<switch name="/controls/lighting/pedestal-light">
 			<default value="0" />
 			<test value="/controls/lighting/ped-flood-knb">
 				/systems/electrical/bus/dc-1 gt 25
