@@ -1008,6 +1008,8 @@
 			<overhead-panel-norm type="double">0</overhead-panel-norm>
 			<reading-light-left-knb type="double">0</reading-light-left-knb>
 			<reading-light-right-knb type="double">0</reading-light-right-knb>
+			<map-light-left-knb type="double">0</map-light-left-knb>
+			<map-light-right-knb type="double">0</map-light-right-knb>
 			<main-panel-pedestal-norm type="double">0</main-panel-pedestal-norm>
 			<strobe type="bool">0</strobe>
 			<no-smoking-sign type="bool">1</no-smoking-sign>

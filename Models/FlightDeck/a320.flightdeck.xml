@@ -9234,10 +9234,10 @@
 		<position>
 			<x-m>-0.57573</x-m>
 			<y-m>-0.16723</y-m>
-			<z-m>0.34432</z-m>
+			<z-m>0.44432</z-m>
 		</position>
 		<direction>
-			<x>-0.2</x>
+			<x>0.1</x>
 			<y>0.0</y>
 			<z>-1</z>
 		</direction>
@@ -9261,12 +9261,12 @@
 		</specular>
 		<attenuation>
 			<c>1.0</c>
-			<l>0.90</l>
-			<q>3.0</q>
+			<l>1.80</l>
+			<q>12.50</q>
 		</attenuation>
 		<spot-exponent>50.0</spot-exponent>
-		<spot-cutoff>40.0</spot-cutoff>
-		<range-m>5.0</range-m>
+		<spot-cutoff>35.0</spot-cutoff>
+		<range-m>2.5</range-m>
 	</light>
 	
 	<light>
@@ -9276,11 +9276,11 @@
 		<position>
 			<x-m>-0.57609</x-m>
 			<y-m>0.175827</y-m>
-			<z-m>0.34651</z-m>
+			<z-m>0.44651</z-m>
 		</position>
 		<direction>
-			<x>0.0</x>
-			<y>0.0</y>
+			<x>0.1</x>
+			<y>0</y>
 			<z>-1</z>
 		</direction>
 		<ambient>
@@ -9303,12 +9303,12 @@
 		</specular>
 		<attenuation>
 			<c>1.0</c>
-			<l>0.90</l>
-			<q>3.0</q>
+			<l>1.80</l>
+			<q>12.50</q>
 		</attenuation>
 		<spot-exponent>50.0</spot-exponent>
-		<spot-cutoff>25.0</spot-cutoff>
-		<range-m>5.0</range-m>
+		<spot-cutoff>35.0</spot-cutoff>
+		<range-m>2.5</range-m>
 	</light>
 	
 	<light>
@@ -9350,6 +9350,142 @@
 		</attenuation>
 		<spot-exponent>50.0</spot-exponent>
 		<spot-cutoff>35.0</spot-cutoff>
+		<range-m>2.5</range-m>
+	</light>
+	
+	<animation>
+		<type>knob</type>
+        <object-name>map_lt_left</object-name>
+        <property>/controls/lighting/map-light-left-knb</property>
+		<factor>180</factor>
+		<offset-deg>-90</offset-deg>
+        <axis>
+			<x1-m>-0.392313</x1-m>
+			<y1-m>-0.645853</y1-m>
+			<z1-m>0.41149</z1-m>
+			<x2-m>-0.387715</x2-m>
+			<y2-m>-0.644105</y2-m>
+			<z2-m>0.401322</z2-m>
+		</axis>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>/controls/lighting/map-light-left-knb</property>
+                <factor>0.05</factor>
+                <min>0</min>
+                <max>1</max>                
+                <wrap>false</wrap>
+            </binding>
+        </action>
+	</animation>
+	
+	<light>
+		<name>Left Map Light</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/map-light-left</property></dim-factor>
+		<position>
+			<x-m>-0.381531</x-m>
+			<y-m>-0.50947</y-m>
+			<z-m>0.467942</z-m>
+		</position>
+		<direction>
+			<x>0.05</x>
+			<y>0.0</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.8</r>
+			<g>0.8</g>
+			<b>0.8</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>1.80</l>
+			<q>12.50</q>
+		</attenuation>
+		<spot-exponent>15.0</spot-exponent>
+		<spot-cutoff>45.0</spot-cutoff>
+		<range-m>2.5</range-m>
+	</light>
+	
+	<animation>
+		<type>knob</type>
+        <object-name>map_lt_right</object-name>
+        <property>/controls/lighting/map-light-right-knb</property>
+		<factor>180</factor>
+		<offset-deg>-90</offset-deg>
+        <axis>
+			<x1-m>-0.392313</x1-m>
+			<y1-m>0.645853</y1-m>
+			<z1-m>0.41149</z1-m>
+			<x2-m>-0.387715</x2-m>
+			<y2-m>0.644105</y2-m>
+			<z2-m>0.401322</z2-m>
+		</axis>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>/controls/lighting/map-light-right-knb</property>
+                <factor>0.05</factor>
+                <min>0</min>
+                <max>1</max>                
+                <wrap>false</wrap>
+            </binding>
+        </action>
+	</animation>
+	
+	<light>
+		<name>Right Map Light</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/map-light-right</property></dim-factor>
+		<position>
+			<x-m>-0.381531</x-m>
+			<y-m> 0.50947</y-m>
+			<z-m>0.467942</z-m>
+		</position>
+		<direction>
+			<x>0.05</x>
+			<y>0.0</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.8</r>
+			<g>0.8</g>
+			<b>0.8</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>1.80</l>
+			<q>12.50</q>
+		</attenuation>
+		<spot-exponent>15.0</spot-exponent>
+		<spot-cutoff>45.0</spot-cutoff>
 		<range-m>2.5</range-m>
 	</light>
 </PropertyList>
