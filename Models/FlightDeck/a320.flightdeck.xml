@@ -9530,7 +9530,7 @@
 		</position>
 		<direction>
 			<x>0.0</x>
-			<y>0.10</y>
+			<y>0.15</y>
 			<z>-1</z>
 		</direction>
 		<ambient>
@@ -9572,7 +9572,7 @@
 		</position>
 		<direction>
 			<x>0.0</x>
-			<y>-0.10</y>
+			<y>0.10</y>
 			<z>-1</z>
 		</direction>
 		<ambient>
@@ -9645,6 +9645,48 @@
 		<range-m>2.0</range-m>
 	</light>
 	
+	<light>
+		<name>Left Console Light 4</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/console-floor-light</property></dim-factor>
+		<position>
+			<x-m>-0.083548</x-m>
+			<y-m>-0.953093</y-m>
+			<z-m>-0.008889</z-m>
+		</position>
+		<direction>
+			<x>1.0</x>
+			<y>0.00</y>
+			<z>-1.0</z>
+		</direction>
+		<ambient>
+			<r>0.8</r>
+			<g>0.8</g>
+			<b>0.8</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>1.50</l>
+			<q>8.30</q>
+		</attenuation>
+		<spot-exponent>30.0</spot-exponent>
+		<spot-cutoff>30.0</spot-cutoff>
+		<range-m>3.0</range-m>
+	</light>
+	
 	<animation>
 		<type>knob</type>
         <object-name>light_console_fo_sw</object-name>
@@ -9686,7 +9728,7 @@
 		</position>
 		<direction>
 			<x>0.0</x>
-			<y>-0.10</y>
+			<y>-0.15</y>
 			<z>-1</z>
 		</direction>
 		<ambient>
@@ -9728,7 +9770,7 @@
 		</position>
 		<direction>
 			<x>0.0</x>
-			<y>0.10</y>
+			<y>-0.10</y>
 			<z>-1</z>
 		</direction>
 		<ambient>
@@ -9765,7 +9807,7 @@
 		<dim-factor><property>/controls/lighting/console-floor-light-right</property></dim-factor>
 		<position>
 			<x-m>-0.141133</x-m>
-			<y-m> 1.08799</y-m>
+			<y-m>1.08799</y-m>
 			<z-m>0.215</z-m>
 		</position>
 		<direction>
@@ -9799,5 +9841,47 @@
 		<spot-exponent>10.0</spot-exponent>
 		<spot-cutoff>60.0</spot-cutoff>
 		<range-m>2.0</range-m>
+	</light>
+	
+	<light>
+		<name>Right Console Light 4</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/console-floor-light-right</property></dim-factor>
+		<position>
+			<x-m>-0.083548</x-m>
+			<y-m> 0.953093</y-m>
+			<z-m>-0.008889</z-m>
+		</position>
+		<direction>
+			<x>1.0</x>
+			<y>0.00</y>
+			<z>-1.0</z>
+		</direction>
+		<ambient>
+			<r>0.8</r>
+			<g>0.8</g>
+			<b>0.8</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>1.50</l>
+			<q>8.30</q>
+		</attenuation>
+		<spot-exponent>30.0</spot-exponent>
+		<spot-cutoff>30.0</spot-cutoff>
+		<range-m>3.0</range-m>
 	</light>
 </PropertyList>
