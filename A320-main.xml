@@ -989,6 +989,8 @@
 			<interior type="double">0</interior>
 			<cockpit type="bool">0</cockpit>
 			<cones type="bool">true</cones>
+			<console-floor-light-sw type="double">0</console-floor-light-sw>
+			<console-floor-light-sw-right type="double">0</console-floor-light-sw-right>
 			<dome-norm type="double">0</dome-norm>
 			<fcu-panel-knb type="double">0</fcu-panel-knb>
 			<fcu-panel-norm type="double">0</fcu-panel-norm>
