@@ -20,10 +20,16 @@
 			</test>
 		</switch>
 		
-		<switch name="/controls/lighting/panel-light-tied">
+		<switch name="/controls/lighting/panel-flood-light-left">
 			<default value="0" />
 			<test logic="OR" value="/controls/lighting/main-flood-knb">
 				/systems/electrical/bus/dc-ess gt 25
+			</test>
+		</switch>
+		
+		<switch name="/controls/lighting/panel-flood-light-right">
+			<default value="0" />
+			<test logic="OR" value="/controls/lighting/main-flood-knb">
 				/systems/electrical/bus/dc-1 gt 25
 			</test>
 		</switch>

@@ -330,18 +330,6 @@
 		</emission>
 	</animation>
 	
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/ddrmi</inherits-from>
-		<object-name>ddrmi_body</object-name>
-		<object-name>ddrmi_vor_adf_select_1</object-name>
-		<object-name>ddrmi_vor_adf_select_2</object-name>
-		<object-name>ddrmi_pointer_1</object-name>
-		<object-name>ddrmi_pointer_2</object-name>
-		<object-name>ddrmi_inside</object-name>
-		<object-name>ddrmi_vor_adf_flag_1</object-name>
-		<object-name>ddrmi_vor_adf_flag_2</object-name>
-	</effect>
-	
 	<!-- Brakes Pressure Indicator -->
 	<animation>
     	<type>rotate</type>
@@ -433,11 +421,6 @@
 			<factor-prop>sim/model/lights/dome-light</factor-prop>
 		</emission>
 	</animation>
-	
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/brake</inherits-from>
-		<object-name>brakes_body</object-name>
-	</effect>
 
 	<!-- Multi-purpose Control and Display Units -->
 	<model>
@@ -7248,49 +7231,6 @@
 			<factor-prop>sim/model/lights/dome-light</factor-prop>
 		</emission>
 	</animation>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/panel-flood</inherits-from>
-		<object-name>main_panel</object-name>
-		<object-name>gear_lever_body</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/gear-lever</inherits-from>
-		<object-name>gear_lever</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/panel-flood-brightness</inherits-from>
-		<object-name>brightness_panel_left_glare</object-name>
-		<object-name>brightness_panel_right_glare</object-name>
-	</effect>
-	
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/panel-flood-glare</inherits-from>
-		<object-name>main_panel_signboard</object-name>
-	</effect>
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/panel-flood-glare-right</inherits-from>
-		<object-name>gear_labels</object-name>
-	</effect>
-
-<!--	<effect>-->
-<!--		<inherits-from>Aircraft/A320-family/Models/Effects/clock-glare</inherits-from>-->
-<!--		<object-name>clock_glare</object-name>-->
-<!--	</effect>-->
-
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/iesi</inherits-from>
-		<object-name>iesi</object-name>
-		<object-name>iesi_baro_knb</object-name>
-		<object-name>iesi_btn_bugs</object-name>
-		<object-name>iesi_btn_ls</object-name>
-		<object-name>iesi_btn_minus</object-name>
-		<object-name>iesi_btn_plus</object-name>
-		<object-name>iesi_btn_rst</object-name>
-	</effect>
 	
 	<animation>
 		<type>pick</type>
@@ -7414,18 +7354,6 @@
 		</axis>
 	</animation>
 	
-	<effect>
-		<inherits-from>Aircraft/A320-family/Models/Effects/clock</inherits-from>
-<!--		<object-name>clock</object-name>-->
-		<object-name>clock_body</object-name>
-		<object-name>et_knob</object-name>
-		<object-name>clock_knob</object-name>
-		<object-name>chrono_reset</object-name>
-		<object-name>chrono_btn</object-name>
-		<object-name>clock_set</object-name>
-<!--		<object-name>clock_display</object-name>-->
-	</effect>
-
 	<!-- move any objects requiring lightmap to another effect file -->
 	<effect>
 		<inherits-from>Aircraft/A320-family/Models/Effects/cockpit-irradiance</inherits-from>
@@ -7775,6 +7703,35 @@
 		<object-name>dcduBtnR.pgeminus</object-name>
 		<object-name>dcduBtnR.pgeplus</object-name>
 		<object-name>dcduBtnGlare</object-name>
+		<object-name>main_panel</object-name>
+		<object-name>gear_lever_body</object-name>
+		<object-name>gear_lever</object-name>
+		<object-name>brightness_panel_left_glare</object-name>
+		<object-name>brightness_panel_right_glare</object-name>
+		<object-name>main_panel_signboard</object-name>
+		<object-name>gear_labels</object-name>
+		<object-name>iesi</object-name>
+		<object-name>iesi_baro_knb</object-name>
+		<object-name>iesi_btn_bugs</object-name>
+		<object-name>iesi_btn_ls</object-name>
+		<object-name>iesi_btn_minus</object-name>
+		<object-name>iesi_btn_plus</object-name>
+		<object-name>iesi_btn_rst</object-name>
+		<object-name>ddrmi_body</object-name>
+		<object-name>ddrmi_vor_adf_select_1</object-name>
+		<object-name>ddrmi_vor_adf_select_2</object-name>
+		<object-name>ddrmi_pointer_1</object-name>
+		<object-name>ddrmi_pointer_2</object-name>
+		<object-name>ddrmi_inside</object-name>
+		<object-name>ddrmi_vor_adf_flag_1</object-name>
+		<object-name>ddrmi_vor_adf_flag_2</object-name>
+		<object-name>brakes_body</object-name>
+		<object-name>clock_body</object-name>
+		<object-name>et_knob</object-name>
+		<object-name>clock_knob</object-name>
+		<object-name>chrono_reset</object-name>
+		<object-name>chrono_btn</object-name>
+		<object-name>clock_set</object-name>
 	</effect>
 	
 	<animation>
@@ -9226,5 +9183,173 @@
 		<spot-exponent>100.0</spot-exponent>
 		<spot-cutoff>25.0</spot-cutoff>
 		<range-m>10.0</range-m>
+	</light>
+	
+	<light>
+		<name>Panel Flood Light Far Left</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/panel-flood-light-left</property></dim-factor>
+		<position>
+			<x-m>-0.520043</x-m>
+			<y-m>-0.714193</y-m>
+			<z-m>0.450317</z-m>
+		</position>
+		<direction>
+			<x>-0.185</x>
+			<y>0.0</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.5</r>
+			<g>0.5</g>
+			<b>0.5</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>1.80</l>
+			<q>12.50</q>
+		</attenuation>
+		<spot-exponent>50.0</spot-exponent>
+		<spot-cutoff>35.0</spot-cutoff>
+		<range-m>2.5</range-m>
+	</light>
+	
+	<light>
+		<name>Panel Flood Light Center Left</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/panel-flood-light-left</property></dim-factor>
+		<position>
+			<x-m>-0.57573</x-m>
+			<y-m>-0.16723</y-m>
+			<z-m>0.34432</z-m>
+		</position>
+		<direction>
+			<x>-0.2</x>
+			<y>0.0</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.5</r>
+			<g>0.5</g>
+			<b>0.5</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>0.90</l>
+			<q>3.0</q>
+		</attenuation>
+		<spot-exponent>50.0</spot-exponent>
+		<spot-cutoff>40.0</spot-cutoff>
+		<range-m>5.0</range-m>
+	</light>
+	
+	<light>
+		<name>Panel Flood Light Center Right</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/panel-flood-light-right</property></dim-factor>
+		<position>
+			<x-m>-0.57609</x-m>
+			<y-m>0.175827</y-m>
+			<z-m>0.34651</z-m>
+		</position>
+		<direction>
+			<x>0.0</x>
+			<y>0.0</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.5</r>
+			<g>0.5</g>
+			<b>0.5</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>0.90</l>
+			<q>3.0</q>
+		</attenuation>
+		<spot-exponent>50.0</spot-exponent>
+		<spot-cutoff>25.0</spot-cutoff>
+		<range-m>5.0</range-m>
+	</light>
+	
+	<light>
+		<name>Panel Flood Light Far Right</name>
+		<type>spot</type>
+		<dim-factor><property>/controls/lighting/panel-flood-light-right</property></dim-factor>
+		<position>
+			<x-m>-0.52009</x-m>
+			<y-m>0.71444</y-m>
+			<z-m>0.4476</z-m>
+		</position>
+		<direction>
+			<x>-0.185</x>
+			<y>0.0</y>
+			<z>-1</z>
+		</direction>
+		<ambient>
+			<r>0.5</r>
+			<g>0.5</g>
+			<b>0.5</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</diffuse>
+		<specular>
+			<r>1.0</r>
+			<g>1.0</g>
+			<b>1.0</b>
+			<a>1.0</a>
+		</specular>
+		<attenuation>
+			<c>1.0</c>
+			<l>1.80</l>
+			<q>12.50</q>
+		</attenuation>
+		<spot-exponent>50.0</spot-exponent>
+		<spot-cutoff>35.0</spot-cutoff>
+		<range-m>2.5</range-m>
 	</light>
 </PropertyList>
