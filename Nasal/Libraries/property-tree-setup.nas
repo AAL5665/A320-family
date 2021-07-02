@@ -50,6 +50,7 @@ var Controls = {
 		aileron: props.globals.getNode("/controls/flight/aileron"),
 		aileronDrivesTiller: props.globals.getNode("/controls/flight/aileron-drives-tiller"),
 		autoCoordination: props.globals.getNode("/controls/flight/auto-coordination"),
+		elevator: props.globals.getNode("/controls/flight/elevator"),
 		elevatorTrim: props.globals.getNode("/controls/flight/elevator-trim"),
 		flaps: props.globals.getNode("/controls/flight/flaps"),
 		flapsTemp: 0,
@@ -57,6 +58,7 @@ var Controls = {
 		flapsPos: props.globals.getNode("/controls/flight/flaps-pos"),
 		speedbrake: props.globals.getNode("/controls/flight/speedbrake"),
 		speedbrakeArm: props.globals.getNode("/controls/flight/speedbrake-arm"),
+		rudder: props.globals.getNode("/controls/flight/rudder"),
 		rudderTrim: props.globals.getNode("/controls/flight/rudder-trim"),
 	},
 	Gear: {
@@ -64,6 +66,9 @@ var Controls = {
 		gearDown: props.globals.getNode("/controls/gear/gear-down"),
 		parkingBrake: props.globals.getNode("/controls/gear/brake-parking"),
 		chocks: props.globals.getNode("/services/chocks/enable"),
+	},
+	Lighting: {
+		landingLights: [props.globals.getNode("/controls/lighting/landing-lights[0]"),props.globals.getNode("/controls/lighting/landing-lights[1]"),props.globals.getNode("/controls/lighting/landing-lights[2]")],
 	},
 	Switches: {
 		annunTest: props.globals.getNode("/controls/switches/annun-test"),
@@ -211,12 +216,14 @@ var Options = {
 };
 
 var Orientation = {
+	heading: props.globals.getNode("/orientation/heading-deg"),
 	pitch: props.globals.getNode("/orientation/pitch-deg"),
 	roll: props.globals.getNode("/orientation/roll-deg"),
 	yaw: props.globals.getNode("/orientation/yaw-deg"),
 };
 
 var Position = {
+	altitudeFt: props.globals.getNode("/position/altitude-ft"),
 	gearAglFt: props.globals.getNode("/position/gear-agl-ft"),
 	latitude: props.globals.getNode("/position/latitude-deg"),
 	longitude: props.globals.getNode("/position/longitude-deg"),
@@ -246,6 +253,12 @@ var Sim = {
 			engine: [props.globals.getNode("/sim/input/selected/engine[0]", 1),props.globals.getNode("/sim/input/selected/engine[1]", 1)],
 		}
 	},
+	Model: {
+		Lights: {
+			navLights: props.globals.getNode("/sim/model/lights/nav-lights"),
+			noseLights: props.globals.getNode("/sim/model/lights/nose-lights"),
+		},
+	},
 	Multiplay: {
 		online: props.globals.getNode("/sim/multiplay/online"),
 	},
@@ -253,6 +266,9 @@ var Sim = {
 	Rendering: {
 		Headshake: {
 			enabled: props.globals.getNode("/sim/rendering/headshake/enabled"),
+		},
+		Shaders: {
+			skydome: props.globals.getNode("/sim/rendering/shaders/skydome"),
 		},
 	},
 	replayState: props.globals.getNode("/sim/freeze/replay-state"),
@@ -278,6 +294,14 @@ var Sim = {
 };
 
 var Systems = {
+	Navigation: {
+		ADR: {
+			Output: {
+				overspeed: props.globals.getNode("/systems/navigation/adr/output/overspeed"),
+				underspeed: props.globals.getNode("/systems/navigation/adr/output/underspeed"),
+			},
+		},
+	},
 	Thrust: {
 		engOut: props.globals.getNode("/systems/thrust/eng-out"),
 		state: [props.globals.getNode("/systems/thrust/state1"), props.globals.getNode("/systems/thrust/state2")],
