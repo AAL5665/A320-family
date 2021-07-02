@@ -4615,9 +4615,13 @@
 	</aircraft>
 	
 	<nasal>
-        <notifications>
-            <file>Aircraft/A320-family/Nasal/emesary/M_frame_notification.nas</file>
-        </notifications>
+		<status>
+			<file>Aircraft/A320-family/Nasal/Status/status-set.nas</file>
+			<file>Aircraft/A320-family/Nasal/Status/status-check.nas</file>
+		</status>
+        	<notifications>
+            		<file>Aircraft/A320-family/Nasal/emesary/M_frame_notification.nas</file>
+        	</notifications>
 		<pts>
 			<file>Aircraft/A320-family/Nasal/Libraries/property-tree-setup.nas</file>
 		</pts>
