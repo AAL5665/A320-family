@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+    <name>status</name>
+	<layout>table</layout>
+    <draggable>true</draggable>
+	
+	<group>
+		<row>0</row>
+		<col>0</col>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Current Status</label>
+		</text>
+		
+		<button>
+			<halign>right</halign>
+			<pref-width>20</pref-width>
+			<pref-height>20</pref-height>
+			<legend>X</legend>
+			<key>Esc</key>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+		</button>
+	</group>
+	
+	<hrule>
+		<row>1</row>
+		<col>0</col>
+	</hrule>
+
+    <group>
+
+        <row>2</row>
+		<col>0</col>
+		<layout>hbox</layout>
+		<input>
+            <width>200</width>
+            <height>25</height>	
+            <label>Passenger</label>
+            <property>/payload/pass/pass-entry</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <live type="bool">true</live>
+        </input>
+
+        <button>
+            <halign>center</halign>
+            <height>60</height>
+            <width>40</width>
+            <legend>Load</legend>
+            <binding>
+                <command>nasal</command>
+                <script>status.pacx();</script>
+            </binding>
+        </button>
+	</group>
+
+    <group>
+        <row>3</row>
+		<col>0</col>
+        <layout>hbox</layout>
+        <input>
+            <width>200</width>
+            <height>25</height>	
+            <label>Cargo</label>
+            <property>/payload/cargo/cargo-entry</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <live type="bool">true</live>
+        </input>
+
+        <button>
+            <halign>center</halign>
+            <height>60</height>
+            <width>40</width>
+            <legend>Load</legend>
+            <binding>
+                <command>nasal</command>
+                <script>status.cargo();</script>
+            </binding>
+        </button>
+	</group>
+
+    <group>
+        <row>4</row>
+		<col>0</col>
+        <layout>vbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Condition:</label>
+		</text>
+		<text>
+			<halign>left</halign>
+			<label>Passenger and Cargo have to be entered with less than 3 digits and not more than 180. Eg: 120</label>
+		</text>
+    </group>
+
+    <group>
+        <row>5</row>
+		<col>0</col>
+        <layout>vbox</layout>
+        <text>
+			<halign>left</halign>
+			<label>Note:</label>
+		</text>
+        <text>
+			<halign>left</halign>
+			<label>Passenger and Cargo have been set to zero.</label>
+		</text>
+        <text>
+			<halign>left</halign>
+			<label>When loading all section are equally balanced.</label>
+		</text>
+        <text>
+			<halign>left</halign>
+			<label>New things will be added in the future.</label>
+		</text>
+    </group>
+
+</PropertyList>
