@@ -212,7 +212,8 @@ canvas.NavDisplay.newMFD = func(canvas_group, parent=nil, nd_options=nil, update
 	# because things are much better configurable that way
 	# now look up all required SVG elements and initialize member fields using the same name  to have a convenient handle
 	foreach(var element; ["dmeL","dmeR","vorL","vorR","vorLId","vorRId",
-			"status.wxr","status.wpt","status.sta","status.arpt","terrHI","terrLO","TerrLabel","terrAhead","terrAltGroup"])
+			"status.wxr","status.wpt","status.sta","status.arpt","terrHI","terrLO","TerrLabel","terrAhead","terrAltGroup",
+			"vorLIdtuneMode","vorRIdtuneMode"])
 	me.symbols[element] = me.nd.getElementById(element);
 
 	foreach(var element; ["dmeLDist","dmeRDist"])
@@ -225,7 +226,7 @@ canvas.NavDisplay.newMFD = func(canvas_group, parent=nil, nd_options=nil, update
 	# anything that needs updatecenter called, should be added to the vector here
 	#
 	foreach(var element; ["staFromL2","staToL2","staFromR2","staToR2",
-			"hdgTrk","trkInd","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
+			"hdgTrk","hdgBug","HdgBugCRT","TrkBugLCD","HdgBugLCD","curHdgPtr",
 			"HdgBugCRT2","TrkBugLCD2","HdgBugLCD2","hdgBug2","selHdgLine","selHdgLine2","curHdgPtr2",
 			"staToL","staFromL","staToR","staFromR"] )
 	me.symbols[element] = me.nd.getElementById(element).updateCenter();
@@ -572,7 +573,31 @@ canvas.NavDisplay.update = func() # FIXME: This stuff is still too aircraft spec
 	var dme1_path = "/instrumentation/dme[2]";
 	var dme2_path = "/instrumentation/dme[3]";
 
+	
+	if(me.get_switch("toggle_lh_vor_adf") == 1) {
+		if (fmgc.FMGCInternal.VOR1.freqSet) {
+			me.symbols.vorLIdtuneMode.show();
+		} else {
+			me.symbols.vorLIdtuneMode.hide();
+		}
+	} else if(me.get_switch("toggle_lh_vor_adf") == -1) {
+		if (fmgc.FMGCInternal.ADF1.freqSet) {
+			me.symbols.vorLIdtuneMode.show();
+		} else {
+			me.symbols.vorLIdtuneMode.hide();
+		}
+	} else {
+		me.symbols.vorLIdtuneMode.hide();
+	}
+	
 	if(me.get_switch("toggle_rh_vor_adf") == 1) {
+		
+		if (fmgc.FMGCInternal.VOR2.freqSet) {
+			me.symbols.vorRIdtuneMode.show();
+		} else {
+			me.symbols.vorRIdtuneMode.hide();
+		}
+		
 		me.symbols.vorR.setText("VOR R");
 		me.symbols.vorR.setColor(0.195,0.96,0.097);
 		me.symbols.dmeR.setText("DME");
@@ -587,17 +612,25 @@ canvas.NavDisplay.update = func() # FIXME: This stuff is still too aircraft spec
 		else me.symbols.dmeRDist.setText(" ---");
 			me.symbols.dmeRDist.setColor(0.195,0.96,0.097);
 	} elsif(me.get_switch("toggle_rh_vor_adf") == -1) {
+	
+		if (fmgc.FMGCInternal.ADF2.freqSet) {
+			me.symbols.vorRIdtuneMode.show();
+		} else {
+			me.symbols.vorRIdtuneMode.hide();
+		}
+		
 		me.symbols.vorR.setText("ADF R");
 		me.symbols.vorR.setColor(0,0.6,0.85);
 		me.symbols.dmeR.setText("");
 		me.symbols.dmeR.setColor(0,0.6,0.85);
 		if((var navident=getprop("/instrumentation/adf[1]/ident")) != "")
 			me.symbols.vorRId.setText(navident);
-		else me.symbols.vorRId.setText(sprintf("%3d",getprop("/instrumentation/adf[1]/frequencies/selected-khz")));
+		else me.symbols.vorRId.setText(sprintf("%3d",pts.Instrumentation.Adf.Frequencies.selectedKhz[1].getValue()));
 			me.symbols.vorRId.setColor(0,0.6,0.85);
 		me.symbols.dmeRDist.setText("");
 		me.symbols.dmeRDist.setColor(0,0.6,0.85);
 	} else {
+		me.symbols.vorRIdtuneMode.hide();
 		me.symbols.vorR.setText("");
 		me.symbols.dmeR.setText("");
 		me.symbols.vorRId.setText("");
@@ -613,13 +646,11 @@ canvas.NavDisplay.update = func() # FIXME: This stuff is still too aircraft spec
 	if((me.in_mode("toggle_display_mode", ["MAP"]) and me.get_switch("toggle_display_type") == "CRT")
 	   or (me.get_switch("toggle_track_heading") and me.get_switch("toggle_display_type") == "LCD"))
 	{
-		me.symbols.trkInd.setRotation(0);
 		me.symbols.curHdgPtr.setRotation((userHdg-userTrk)*D2R);
 		me.symbols.curHdgPtr2.setRotation((userHdg-userTrk)*D2R);
 	}
 	else
 	{
-		me.symbols.trkInd.setRotation((userTrk-userHdg)*D2R);
 		me.symbols.curHdgPtr.setRotation(0);
 		me.symbols.curHdgPtr2.setRotation(0);
 	}
@@ -656,10 +687,6 @@ canvas.NavDisplay.update = func() # FIXME: This stuff is still too aircraft spec
 	var adf0hdg = getprop("/instrumentation/adf/indicated-bearing-deg");
 	var adf1hdg = getprop("/instrumentation/adf[1]/indicated-bearing-deg");
 	if(!me.get_switch("toggle_centered")) {
-		if(me.in_mode("toggle_display_mode", ["PLAN"]) or (me.adirs_property.getValue() != 1 or (me.change_phase == 1) and (adirs_3.getValue() != 1 or att_switch.getValue() != me.attitude_heading_setting)))
-			me.symbols.trkInd.hide();
-		else
-			me.symbols.trkInd.show();
 		if((getprop("/instrumentation/nav[2]/in-range") and me.get_switch("toggle_lh_vor_adf") == 1)) {
 			me.symbols.staToL.setColor(0.195,0.96,0.097);
 			me.symbols.staFromL.setColor(0.195,0.96,0.097);
@@ -713,7 +740,6 @@ canvas.NavDisplay.update = func() # FIXME: This stuff is still too aircraft spec
 		}
 		me.symbols.selHdgLine.setVisible(staPtrVis and hdg_bug_active);
 	} else {
-		me.symbols.trkInd.hide();
 		if((getprop("/instrumentation/nav[2]/in-range") and me.get_switch("toggle_lh_vor_adf") == 1)) {
 			me.symbols.staFromL2.setColor(0.195,0.96,0.097);
 			me.symbols.staToL2.setColor(0.195,0.96,0.097);

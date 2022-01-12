@@ -69,9 +69,15 @@ var Controls = {
 	},
 	Lighting: {
 		landingLights: [props.globals.getNode("/controls/lighting/landing-lights[0]"),props.globals.getNode("/controls/lighting/landing-lights[1]"),props.globals.getNode("/controls/lighting/landing-lights[2]")],
+		noSmokingSign: props.globals.getNode("/controls/lighting/no-smoking-sign"),
+		seatbeltSign: props.globals.getNode("/controls/lighting/seatbelt-sign"),
+		strobe: props.globals.getNode("/controls/lighting/strobe"),
 	},
 	Switches: {
 		annunTest: props.globals.getNode("/controls/switches/annun-test"),
+		emerLtsSwitch: props.globals.getNode("/controls/switches/emer-lights"),
+		noSmokingSwitch: props.globals.getNode("/controls/switches/no-smoking-sign"),
+		seatbeltSwitch: props.globals.getNode("/controls/switches/seatbelt-sign"),
 	},
 };
 
@@ -87,6 +93,7 @@ var Engines = {
 		n1Actual: [props.globals.getNode("/engines/engine[0]/n1-actual"), props.globals.getNode("/engines/engine[1]/n1-actual")],
 		n2Actual: [props.globals.getNode("/engines/engine[0]/n2-actual"), props.globals.getNode("/engines/engine[1]/n2-actual")],
 		oilPsi: [props.globals.getNode("/engines/engine[0]/oil-psi-actual"), props.globals.getNode("/engines/engine[1]/oil-psi-actual")],
+		oilQt: [props.globals.getNode("/engines/engine[0]/oil-qt-actual"), props.globals.getNode("/engines/engine[1]/oil-qt-actual")],
 		thrust: [props.globals.getNode("/engines/engine[0]/thrust-lb"), props.globals.getNode("/engines/engine[1]/thrust-lb")],
 		reverser: [props.globals.getNode("/engines/engine[0]/reverser-pos-norm"), props.globals.getNode("/engines/engine[1]/reverser-pos-norm")],
 		state: [props.globals.getNode("/engines/engine[0]/state"), props.globals.getNode("/engines/engine[1]/state")],
@@ -109,7 +116,7 @@ var Fdm = {
 			brake: [props.globals.getNode("/fdm/jsbsim/fcs/left-brake-cmd-norm"),props.globals.getNode("/fdm/jsbsim/fcs/right-brake-cmd-norm")],
 			flapDeg: props.globals.getNode("/fdm/jsbsim/fcs/flap-pos-deg"),
 			slatDeg: props.globals.getNode("/fdm/jsbsim/fcs/slat-pos-deg"),
-			slatLocked: props.globals.getNode("/fdm/jsbsim/fcs/slat-locked"),
+			slatLocked: props.globals.getNode("/fdm/jsbsim/fcs/sfcc/slat-locked"),
 		},
 		Fbw: {
 			aileron: props.globals.getNode("/fdm/jsbsim/fbw/aileron-sidestick"),
@@ -135,6 +142,10 @@ var Fdm = {
 				fuelUsed: [props.globals.getNode("/fdm/jsbsim/propulsion/engine[0]/fuel-used-lbs"), props.globals.getNode("/fdm/jsbsim/propulsion/engine[1]/fuel-used-lbs")],
 				reverserAngle: [props.globals.getNode("/fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad"), props.globals.getNode("/fdm/jsbsim/propulsion/engine[1]/reverser-angle-rad")],
 			},
+			Tank: {
+				contentsLbs: [props.globals.getNode("/fdm/jsbsim/propulsion/tank[0]/contents-lbs"), props.globals.getNode("/fdm/jsbsim/propulsion/tank[1]/contents-lbs"), props.globals.getNode("/fdm/jsbsim/propulsion/tank[2]/contents-lbs"), 
+					props.globals.getNode("/fdm/jsbsim/propulsion/tank[3]/contents-lbs"), props.globals.getNode("/fdm/jsbsim/propulsion/tank[4]/contents-lbs"), props.globals.getNode("/fdm/jsbsim/propulsion/tank[5]/contents-lbs"), props.globals.getNode("/fdm/jsbsim/propulsion/tank[6]/contents-lbs")],
+			},
 		},
 	},
 };
@@ -153,6 +164,12 @@ var Gear = {
 };
 
 var Instrumentation = {
+	Adf: {
+		ident: [props.globals.getNode("/instrumentation/adf[0]/ident"), props.globals.getNode("/instrumentation/adf[1]/ident")],
+		Frequencies: {
+			selectedKhz: [props.globals.getNode("/instrumentation/adf[0]/frequencies/selected-khz"), props.globals.getNode("/instrumentation/adf[1]/frequencies/selected-khz")],
+		},
+	},
 	AirspeedIndicator: {
 		indicatedSpdKt: props.globals.getNode("/instrumentation/airspeed-indicator/indicated-speed-kt"),
 		indicatedMach: props.globals.getNode("/instrumentation/airspeed-indicator/indicated-mach"),
@@ -162,6 +179,10 @@ var Instrumentation = {
 		oldQnh: props.globals.getNode("/instrumentation/altimeter[0]/oldqnh"),
 		settingInhg: props.globals.getNode("/instrumentation/altimeter[0]/setting-inhg"),
 		std: props.globals.getNode("/instrumentation/altimeter[0]/std"),
+		indicatedFtIESI: props.globals.getNode("/instrumentation/altimeter[6]/indicated-altitude-ft"),
+		oldQnhIESI: props.globals.getNode("/instrumentation/altimeter[6]/oldqnh"),
+		settingInhgIESI: props.globals.getNode("/instrumentation/altimeter[6]/setting-inhg"),
+		stdIESI: props.globals.getNode("/instrumentation/altimeter[6]/std"),
 	},
 	Clock: {
 		indicatedString: props.globals.getNode("/instrumentation/clock/indicated-string"),
@@ -195,13 +216,25 @@ var Instrumentation = {
 	MKVII: {
 		Inputs: {
 			Discretes: {
-				flap3Override: props.globals.getNode("/instrumentation/mk-viii/inputs/discretes/momentary-flap3-override"),
+				flap3Override: props.globals.getNode("/instrumentation/mk-viii/inputs/discretes/momentary-flap-3-override"),
+				flapAllOverride: props.globals.getNode("/instrumentation/mk-viii/inputs/discretes/momentary-flap-all-override"),
+				steepApproach: props.globals.getNode("/instrumentation/mk-viii/inputs/discretes/steep-approach"),
 			},
 		},
 	},
 	Nav: {
+		Frequencies: {
+			selectedMhz: [props.globals.getNode("/instrumentation/nav[0]/frequencies/selected-mhz"), props.globals.getNode("/instrumentation/nav[1]/frequencies/selected-mhz"), props.globals.getNode("/instrumentation/nav[2]/frequencies/selected-mhz"), props.globals.getNode("/instrumentation/nav[3]/frequencies/selected-mhz")],
+		},
+		Radials: {
+			selectedDeg: [props.globals.getNode("/instrumentation/nav[0]/radials/selected-deg"), props.globals.getNode("/instrumentation/nav[1]/radials/selected-deg"), props.globals.getNode("/instrumentation/nav[2]/radials/selected-deg"), props.globals.getNode("/instrumentation/nav[3]/radials/selected-deg")],
+		},
 		gsDeflection: props.globals.getNode("/instrumentation/nav[0]/gs-needle-deflection-norm"),
 		locDeflection: props.globals.getNode("/instrumentation/nav[0]/heading-needle-deflection-norm"),
+	},
+	PFD: {
+		windDirection: props.globals.getNode("/instrumentation/pfd/wind-direction"),
+		windSpeed: props.globals.getNode("/instrumentation/pfd/wind-speed"),
 	},
 	TCAS: {
 		servicable: props.globals.getNode("/instrumentation/tcas/serviceable"),
@@ -209,6 +242,10 @@ var Instrumentation = {
 			mode: props.globals.getNode("/instrumentation/tcas/inputs/mode"),
 		},
 	},
+};
+
+var Modes = {
+	EcamDuXfr: props.globals.getNode("/modes/ecam-du-xfr"),
 };
 
 var Options = {
@@ -238,7 +275,6 @@ var Sim = {
 		name: props.globals.getNode("/sim/current-view/name", 1),
 		pitchOffsetDeg: props.globals.getNode("/sim/current-view/pitch-offset-deg", 1),
 		rollOffsetDeg: props.globals.getNode("/sim/current-view/roll-offset-deg", 1),
-		type: props.globals.getNode("/sim/current-view/type", 1),
 		viewNumberRaw: props.globals.getNode("/sim/current-view/view-number-raw", 1),
 		zOffsetDefault: props.globals.getNode("/sim/current-view/z-offset-default", 1),
 		xOffsetM: props.globals.getNode("/sim/current-view/x-offset-m", 1),

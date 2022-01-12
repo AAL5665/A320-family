@@ -120,7 +120,6 @@ var SimbriefParser = {
 			fmgc.updateArptLatLon();
 			fmgc.updateARPT();
 		} else {
-			me.cleanupInvalid();
 			return nil;
 		}
 		
@@ -270,7 +269,7 @@ var SimbriefParser = {
 		fmgc.FMGCInternal.costIndex = me.OFP.getNode("general/costindex").getValue();
 		fmgc.FMGCInternal.costIndexSet = 1;
 		fmgc.FMGCNodes.costIndex.setValue(fmgc.FMGCInternal.costIndex);
-		fmgc.FMGCInternal.tropo = me.OFP.getNode("general/avg_tropopause").getValue();
+		fmgc.FMGCInternal.tropo = math.round(me.OFP.getNode("general/avg_tropopause").getValue(), 10);
 		fmgc.FMGCInternal.tropoSet = 1;
 		
 		# Set cruise altitude

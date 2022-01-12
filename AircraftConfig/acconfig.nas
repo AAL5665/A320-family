@@ -51,6 +51,7 @@ setprop("/systems/acconfig/out-of-date", 0);
 setprop("/systems/acconfig/mismatch-code", "0x000");
 setprop("/systems/acconfig/mismatch-reason", "XX");
 setprop("/systems/acconfig/options/keyboard-mode", 0);
+setprop("/systems/acconfig/options/fgcamera-keys-enabled", 0);
 setprop("/systems/acconfig/options/weight-kgs", 1);
 setprop("/systems/acconfig/options/adirs-skip", 0);
 setprop("/systems/acconfig/options/allow-oil-consumption", 0);
@@ -60,11 +61,7 @@ setprop("/systems/acconfig/options/welcome-skip", 0);
 setprop("/systems/acconfig/options/no-rendering-warn", 0);
 setprop("/systems/acconfig/options/save-state", 0);
 setprop("/systems/acconfig/options/seperate-tiller-axis", 0);
-setprop("/systems/acconfig/options/pfd-rate", 1);
 setprop("/systems/acconfig/options/nd-rate", 1);
-setprop("/systems/acconfig/options/uecam-rate", 1);
-setprop("/systems/acconfig/options/lecam-rate", 1);
-setprop("/systems/acconfig/options/iesi-rate", 1);
 setprop("/systems/acconfig/options/autopush/show-route", 1);
 setprop("/systems/acconfig/options/autopush/show-wingtip", 1);
 var main_dlg = gui.Dialog.new("/sim/gui/dialogs/acconfig/main/dialog", "Aircraft/A320-family/AircraftConfig/main.xml");
@@ -104,14 +101,30 @@ setlistener("/systems/acconfig/new-revision", func {
 	}
 });
 
+var fgfsMin = split(".", getprop("/sim/minimum-fg-version"));
+var fgfsVer = split(".", getprop("/sim/version/flightgear"));
+
+var versionCheck = func() {
+	if (fgfsVer[0] < fgfsMin[0] or fgfsVer[1] < fgfsMin[1]) {
+		return 0;
+	} else if (fgfsVer[1] == fgfsMin[1]) {
+		if (fgfsVer[2] < fgfsMin[2]) {
+			return 0;
+		} else {
+			return 1;
+		}
+	} else {
+		return 1;
+	}
+}
+
 var mismatch_chk = func {
-	if (num(string.replace(getprop("/sim/version/flightgear"),".","")) < 201920) {
+	if (!versionCheck()) {
 		setprop("/systems/acconfig/mismatch-code", "0x121");
-		setprop("/systems/acconfig/mismatch-reason", "FGFS version is too old! Please update FlightGear to at least 2019.2.0.");
+		setprop("/systems/acconfig/mismatch-reason", "FGFS version is too old! Please update FlightGear to at least " ~ getprop("/sim/minimum-fg-version") ~ ".");
 		if (getprop("/systems/acconfig/out-of-date") != 1) {
 			error_mismatch.open();
 		}
-		libraries.systemsLoop.stop();
 		print("Mismatch: 0x121");
 		welcome_dlg.close();
 	} else if (getprop("/gear/gear[0]/wow") == 0 or getprop("/position/altitude-ft") >= 15000) {
@@ -120,7 +133,6 @@ var mismatch_chk = func {
 		if (getprop("/systems/acconfig/out-of-date") != 1) {
 			error_mismatch.open();
 		}
-		libraries.systemsLoop.stop();
 		print("Mismatch: 0x223");
 		welcome_dlg.close();
 	} else if (getprop("/systems/acconfig/libraries-loaded") != 1) {
@@ -129,7 +141,6 @@ var mismatch_chk = func {
 		if (getprop("/systems/acconfig/out-of-date") != 1) {
 			error_mismatch.open();
 		}
-		libraries.systemsLoop.stop();
 		print("Mismatch: 0x247");
 		welcome_dlg.close();
 	}
@@ -204,6 +215,7 @@ var renderingSettings = {
 var readSettings = func {
 	io.read_properties(pts.Sim.fgHome.getValue() ~ "/Export/A320-family-config.xml", "/systems/acconfig/options");
 	setprop("/options/system/keyboard-mode", getprop("/systems/acconfig/options/keyboard-mode"));
+	if (getprop("/sim/fgcamera/enable")) setprop("/options/system/fgcamera-keys-enabled", getprop("/systems/acconfig/options/fgcamera-keys-enabled")); # read only when FGCamera enabled
 	setprop("/options/system/weight-kgs", getprop("/systems/acconfig/options/weight-kgs"));
 	setprop("/options/system/save-state", getprop("/systems/acconfig/options/save-state"));
 	setprop("/controls/adirs/skip", getprop("/systems/acconfig/options/adirs-skip"));
@@ -218,6 +230,7 @@ var readSettings = func {
 
 var writeSettings = func {
 	setprop("/systems/acconfig/options/keyboard-mode", getprop("/options/system/keyboard-mode"));
+	setprop("/systems/acconfig/options/fgcamera-keys-enabled", getprop("/options/system/fgcamera-keys-enabled"));
 	setprop("/systems/acconfig/options/weight-kgs", getprop("/options/system/weight-kgs"));
 	setprop("/systems/acconfig/options/save-state", getprop("/options/system/save-state"));
 	setprop("/systems/acconfig/options/adirs-skip", getprop("/controls/adirs/skip"));
@@ -323,6 +336,7 @@ var beforestart = func {
 		setprop("/controls/flight/elevator-trim", 0);
 		libraries.systemsInit();
 		libraries.variousReset();
+		setprop("/controls/oxygen/cockpit-oxygen-supply-pb", 1);
 		failResetOld();
 		
 		# Now the Startup!
@@ -380,9 +394,9 @@ var beforestart_b = func {
 	setprop("/controls/adirs/mcducbtn", 1);
 	setprop("/controls/switches/beacon", 1);
 	setprop("/controls/lighting/nav-lights-switch", 1);
-	libraries.noSmokingSwitch.setValue(0.5);
-	libraries.seatbeltSwitch.setValue(1.0);
-	libraries.emerLtsSwitch.setValue(0.5);
+	pts.Controls.Switches.noSmokingSwitch.setValue(0.5);
+	pts.Controls.Switches.seatbeltSwitch.setValue(1.0);
+	pts.Controls.Switches.emerLtsSwitch.setValue(0.5);
 	setprop("/controls/radio/rmp[0]/on", 1);
 	setprop("/controls/radio/rmp[1]/on", 1);
 	setprop("/controls/radio/rmp[2]/on", 1);
@@ -418,6 +432,7 @@ var taxi = func {
 		setprop("/controls/flight/elevator-trim", 0);
 		libraries.systemsInit();
 		libraries.variousReset();
+		setprop("/controls/oxygen/cockpit-oxygen-supply-pb", 1);
 		failResetOld();
 		
 		# Now the Startup!
@@ -476,9 +491,9 @@ var taxi_b = func {
 	setprop("/controls/switches/beacon", 1);
 	setprop("/controls/switches/wing-lights", 1);
 	setprop("/controls/lighting/nav-lights-switch", 1);
-	libraries.noSmokingSwitch.setValue(0.5);
-	libraries.seatbeltSwitch.setValue(1.0);
-	libraries.emerLtsSwitch.setValue(0.5);
+	pts.Controls.Switches.noSmokingSwitch.setValue(0.5);
+	pts.Controls.Switches.seatbeltSwitch.setValue(1.0);
+	pts.Controls.Switches.emerLtsSwitch.setValue(0.5);
 	setprop("/controls/radio/rmp[0]/on", 1);
 	setprop("/controls/radio/rmp[1]/on", 1);
 	setprop("/controls/radio/rmp[2]/on", 1);

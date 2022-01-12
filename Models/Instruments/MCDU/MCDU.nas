@@ -26,11 +26,10 @@ var myCRZWIND = [nil, nil];
 var myDESWIND = [nil, nil];
 var myHISTWIND = [nil, nil];
 var myAtis = [nil, nil];
-var default = "BoeingCDU-Large.ttf";
-#var symbol = "helvetica_medium.txf";
-var symbol = "LiberationMonoCustom.ttf";
-var normal = 70;
-var small = 56;
+var default = "HoneywellMCDU.ttf";
+var symbol = "HoneywellMCDU.ttf";
+var normal = 60;
+var small = 46;
 var page = "";
 var fplnLineSize = 0;
 var fplnl1 = "";
@@ -81,27 +80,6 @@ var mcdu1_lgt = props.globals.getNode("/controls/lighting/DU/mcdu1", 1);
 var mcdu2_lgt = props.globals.getNode("/controls/lighting/DU/mcdu2", 1);
 var acType = props.globals.getNode("/MCDUC/type", 1);
 var engType = props.globals.getNode("/MCDUC/eng", 1);
-var database1 = props.globals.getNode("/FMGC/internal/navdatabase", 1);
-var database2 = props.globals.getNode("/FMGC/internal/navdatabase2", 1);
-var databaseCode = props.globals.getNode("/FMGC/internal/navdatabasecode", 1);
-
-# RADNAV
-var vor1 = props.globals.getNode("/FMGC/internal/vor1-mcdu", 1);
-var vor2 = props.globals.getNode("/FMGC/internal/vor2-mcdu", 1);
-var ils1 = props.globals.getNode("/FMGC/internal/ils1-mcdu", 1);
-var adf1 = props.globals.getNode("/FMGC/internal/adf1-mcdu", 1);
-var adf2 = props.globals.getNode("/FMGC/internal/adf2-mcdu", 1);
-var vor1FreqSet = props.globals.getNode("/FMGC/internal/vor1freq-set", 1);
-var vor1CRSSet = props.globals.getNode("/FMGC/internal/vor1crs-set", 1);
-var vor2FreqSet = props.globals.getNode("/FMGC/internal/vor2freq-set", 1);
-var vor2CRSSet = props.globals.getNode("/FMGC/internal/vor2crs-set", 1);
-var ils1FreqSet = props.globals.getNode("/FMGC/internal/ils1freq-set", 1);
-var ils1CRSSet = props.globals.getNode("/FMGC/internal/ils1crs-set", 1);
-var adf1FreqSet = props.globals.getNode("/FMGC/internal/adf1freq-set", 1);
-var adf2FreqSet = props.globals.getNode("/FMGC/internal/adf2freq-set", 1);
-var ils1CRS = props.globals.getNode("/instrumentation/nav[0]/radials/selected-deg", 1);
-var vor1CRS = props.globals.getNode("/instrumentation/nav[2]/radials/selected-deg", 1);
-var vor2CRS = props.globals.getNode("/instrumentation/nav[3]/radials/selected-deg", 1);
 
 # INT-A
 var ADIRSMCDUBTN = props.globals.getNode("/controls/adirs/mcducbtn", 1);
@@ -186,7 +164,7 @@ var togglePageFreeze = func(i) {
 var canvas_MCDU_base = {
 	init: func(canvas_group, file) {
 		var font_mapper = func(family, weight) {
-			return "BoeingCDU-Large.ttf";
+			return "HoneywellMCDU.ttf";
 		};
 
 		canvas.parsesvg(canvas_group, file, {"font-mapper": font_mapper});
@@ -567,13 +545,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("MCDU MENU");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, 1, -1, -1);
+				showLeft(me,1, 1, 1, 1, -1, -1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, -1, -1);
-				me.showLeftArrow(1, 1, 1, 1, -1, -1);
-				me.showRight(-1, -1, -1, -1, -1, -1);
-				me.showRightS(-1, -1, -1, -1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,-1, -1, -1, -1, -1, -1);
+				showLeftArrow(me,1, 1, 1, 1, -1, -1);
+				showRight(me,-1, -1, -1, -1, -1, -1);
+				showRightS(me,-1, -1, -1, -1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -618,13 +596,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("ATSU DATALINK");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, -1, -1, -1, -1, -1);
+				showLeft(me,1, -1, -1, -1, -1, -1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, -1, -1);
-				me.showLeftArrow(1, -1, -1, -1, -1, -1);
-				me.showRight(1, -1, -1, -1, -1, 1);
-				me.showRightS(-1, -1, -1, -1, -1, -1);
-				me.showRightArrow(1, -1, -1, -1, -1, 1);
+				showLeftS(me,-1, -1, -1, -1, -1, -1);
+				showLeftArrow(me,1, -1, -1, -1, -1, -1);
+				showRight(me,1, -1, -1, -1, -1, 1);
+				showRightS(me,-1, -1, -1, -1, -1, -1);
+				showRightArrow(me,1, -1, -1, -1, -1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -641,13 +619,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("AOC MENU");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, -1, 1, 1);
+				showLeft(me,1, 1, 1, -1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, -1, 1);
-				me.showLeftArrow(1, 1, 1, -1, 1, 1);
-				me.showRight(1, 1, 1, 1, 1, -1);
-				me.showRightS(-1, -1, -1, -1, -1, -1);
-				me.showRightArrow(1, 1, 1, 1, 1, 1);
+				showLeftS(me,-1, -1, -1, -1, -1, 1);
+				showLeftArrow(me,1, 1, 1, -1, 1, 1);
+				showRight(me,1, 1, 1, 1, 1, -1);
+				showRightS(me,-1, -1, -1, -1, -1, -1);
+				showRightArrow(me,1, 1, 1, 1, 1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -687,14 +665,14 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].hide();
 				me["ArrowRight"].hide();				
 
-				me.showLeft(1, 1, 1, 1, 1, -1);								
-				me.showLeftS(1, -1, 1, 1, 1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, -1);
-				me.showCenter(-1, 1, 1, 1, 1, -1);
-				me.showCenterS(-1, 1, 1, 1, 1, -1);
-				me.showRight(1, 1, 1, 1, 1, -1);
-				me.showRightS(1, 1, 1, 1, 1, -1);
-				me.showRightArrow(-1, -1, -1, -1, 1, -1);
+				showLeft(me,1, 1, 1, 1, 1, -1);								
+				showLeftS(me,1, -1, 1, 1, 1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, -1);
+				showCenter(me,-1, 1, 1, 1, 1, -1);
+				showCenterS(me,-1, 1, 1, 1, 1, -1);
+				showRight(me,1, 1, 1, 1, 1, -1);
+				showRightS(me,1, 1, 1, 1, 1, -1);
+				showRightArrow(me,-1, -1, -1, -1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();				
 				
@@ -801,13 +779,13 @@ var canvas_MCDU_base = {
 				me.defaultPageNumbers();
 				me["Simple_L0S"].hide();
 
-				me.showLeft(1, 1, 1, 1, 1, 1);
-				me.showLeftS(1, 1, 1, 1, -1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
+				showLeftS(me,1, 1, 1, 1, -1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
 				me.colorLeftArrow("wht", "wht", "wht", "wht", "wht", "wht");
-				me.showRight(1, 1, 1, 1, -1, -1);
-				me.showRightS(1, 1, 1, 1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showRight(me,1, 1, 1, 1, -1, -1);
+				showRightS(me,1, 1, 1, 1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				
 				#me["PRINTPAGE"] - TODO missing asterisk at 5L - only useful when printing available
 
@@ -858,15 +836,15 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("AOC CONFIGURATION");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, -1, -1, -1, -1, 1);
+				showLeft(me,1, -1, -1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, -1, -1, -1, -1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(1, 1, 1, 1, 1, -1);
-				me.showCenterS(1, -1, 1, -1, 1, -1);
-				me.showRight(1, -1, -1, -1, -1, 1);
-				me.showRightS(1, -1, -1, -1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,1, -1, -1, -1, -1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,1, 1, 1, 1, 1, -1);
+				showCenterS(me,1, -1, 1, -1, 1, -1);
+				showRight(me,1, -1, -1, -1, -1, 1);
+				showRightS(me,1, -1, -1, -1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -913,13 +891,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("WEATHER REQ");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, -1, -1, -1, -1, 1);
+				showLeft(me,1, -1, -1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, -1, -1, -1, -1, -1);
-				me.showLeftArrow(1, -1, -1, -1, -1, 1);
-				me.showRight(1, 1, 1, -1, 1, -1);
-				me.showRightS(1, 1, 1, -1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,1, -1, -1, -1, -1, -1);
+				showLeftArrow(me,1, -1, -1, -1, -1, 1);
+				showRight(me,1, 1, 1, -1, 1, -1);
+				showRightS(me,1, 1, 1, -1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -976,13 +954,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("WEATHER TYPE");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, -1, -1, -1);
+				showLeft(me,1, 1, 1, -1, -1, -1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, -1, -1);
-				me.showLeftArrow(1, 1, 1, -1, -1, -1);
-				me.showRight(1, 1, 1, -1, -1, -1);
-				me.showRightS(-1, -1, -1, -1, -1, -1);
-				me.showRightArrow(1, 1, 1, -1, -1, -1);
+				showLeftS(me,-1, -1, -1, -1, -1, -1);
+				showLeftArrow(me,1, 1, 1, -1, -1, -1);
+				showRight(me,1, 1, 1, -1, -1, -1);
+				showRightS(me,-1, -1, -1, -1, -1, -1);
+				showRightArrow(me,1, 1, 1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1021,9 +999,9 @@ var canvas_MCDU_base = {
 				me.colorLeftS("wht", "wht", "wht", "wht", "wht", "wht");
 				me.colorRightS("wht", "wht", "wht", "wht", "wht", "wht");
 				
-				me.showRight(-1, -1, -1, -1, -1, -1);
-				me.showRightS(-1, -1, -1, -1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showRight(me,-1, -1, -1, -1, -1, -1);
+				showRightS(me,-1, -1, -1, -1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				
 				if (myReceivedMessages[i] != nil) {
 					me["Simple_Title"].setText(sprintf("%s", myReceivedMessages[i].title));
@@ -1088,11 +1066,11 @@ var canvas_MCDU_base = {
 				me.colorCenterS("grn", "wht", "wht", "wht", "wht", "wht");
 				me.colorRightS("wht", "wht", "wht", "wht", "wht", "wht");
 				
-				me.showCenter(-1, -1, -1, -1, -1, -1);
-				me.showCenterS(1, -1, -1, -1, -1, -1);
-				me.showRight(-1, -1, -1, -1, -1, -1);
-				me.showRightS(1, -1, -1, -1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showCenter(me,-1, -1, -1, -1, -1, -1);
+				showCenterS(me,1, -1, -1, -1, -1, -1);
+				showRight(me,-1, -1, -1, -1, -1, -1);
+				showRightS(me,1, -1, -1, -1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				
 				
 				if (myReceivedMessage[i] != nil) {
@@ -1182,13 +1160,13 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(1, 1, -1, 1, 1, 1);
+				showLeft(me,1, 1, -1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, -1, 1);
-				me.showLeftArrow(1, 1, -1, 1, 1, 1);
-				me.showRight(1, 1, 1, 1, 1, 1);
-				me.showRightS(-1, -1, -1, -1, 1, -1);
-				me.showRightArrow(1, 1, 1, 1, 1, 1);
+				showLeftS(me,-1, -1, -1, -1, -1, 1);
+				showLeftArrow(me,1, 1, -1, 1, 1, 1);
+				showRight(me,1, 1, 1, 1, 1, 1);
+				showRightS(me,-1, -1, -1, -1, 1, -1);
+				showRightArrow(me,1, 1, 1, 1, 1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1228,16 +1206,16 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, -1, 1, 1);
-				me.showLeftArrow(1, 1, 1, -1, 1, 1);
-				me.showCenter(-1, -1, -1, -1, -1, -1);
-				me.showCenterS(-1, -1, -1, 1, -1, -1);
-				me.showRightS(1, 1, 1, -1, -1, 1);
-				me.showRight(1, 1, 1, -1, -1, 1);
-				me.showRightS(1, 1, 1, -1, -1, 1);
-				me.showRightArrow(1, 1, 1, -1, -1, 1);
+				showLeftS(me,1, 1, 1, -1, 1, 1);
+				showLeftArrow(me,1, 1, 1, -1, 1, 1);
+				showCenter(me,-1, -1, -1, -1, -1, -1);
+				showCenterS(me,-1, -1, -1, 1, -1, -1);
+				showRightS(me,1, 1, 1, -1, -1, 1);
+				showRight(me,1, 1, 1, -1, -1, 1);
+				showRightS(me,1, 1, 1, -1, -1, 1);
+				showRightArrow(me,1, 1, 1, -1, -1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1319,15 +1297,15 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(1, 1, -1, -1, -1, 1);
+				showLeft(me,1, 1, -1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, -1, 1);
-				me.showLeftArrow(1, 1, -1, -1, -1, 1);
-				me.showCenter(-1, -1, -1, -1, -1, -1);
-				me.showCenterS(1, -1, -1, -1, -1, -1);
-				me.showRight(1, -1, -1, -1, -1, -1);
-				me.showRightS(-1, -1, -1, -1, -1, -1);
-				me.showRightArrow(1, -1, -1, -1, -1, -1);
+				showLeftS(me,-1, -1, -1, -1, -1, 1);
+				showLeftArrow(me,1, 1, -1, -1, -1, 1);
+				showCenter(me,-1, -1, -1, -1, -1, -1);
+				showCenterS(me,1, -1, -1, -1, -1, -1);
+				showRight(me,1, -1, -1, -1, -1, -1);
+				showRightS(me,-1, -1, -1, -1, -1, -1);
+				showRightArrow(me,1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1415,15 +1393,15 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].hide();
 				me["ArrowRight"].hide();
 				
-				me.showLeft(1, 1, 1, 1, -1, 1);
+				showLeft(me,1, 1, 1, 1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, -1, -1, -1, -1, 1);
-				me.showLeftArrow(1, 1, 1, -1, -1, 1);
-				me.showCenter(-1, -1, -1, -1, -1, -1);
-				me.showCenterS(-1, -1, -1, -1, -1, -1);
-				me.showRight(1, 1, 1, 1, 1, 1);
-				me.showRightS(1, 1, 1, 1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, 1, -1);
+				showLeftS(me,1, -1, -1, -1, -1, 1);
+				showLeftArrow(me,1, 1, 1, -1, -1, 1);
+				showCenter(me,-1, -1, -1, -1, -1, -1);
+				showCenterS(me,-1, -1, -1, -1, -1, -1);
+				showRight(me,1, 1, 1, 1, 1, 1);
+				showRightS(me,1, 1, 1, 1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1432,10 +1410,10 @@ var canvas_MCDU_base = {
 				me.colorLeft("blu", "blu", "blu", "blu", "wht", "wht");
 				me.colorLeftS("wht", "wht", "wht", "wht", "wht", "wht");
 				me.colorLeftArrow("wht", "wht", "wht", "wht", "wht", "wht");
-				me.colorCenter("grn", "grn", "grn", "grn", "wht", "wht");
+				me.colorCenter("wht", "wht", "wht", "wht", "wht", "wht");
 				me.colorCenterS("wht", "wht", "wht", "wht", "wht", "wht");
-				me.colorRight("wht", "wht", "wht", "wht", "wht", "wht");
-				me.colorRightS("wht", "wht", "wht", "wht", "wht", "wht");
+				me.colorRight("blu", "blu", "blu", "blu", "wht", "blu");
+				me.colorRightS("blu", "blu", "blu", "blu", "wht", "wht");
 				me.colorRightArrow("wht", "wht", "wht", "wht", "wht", "wht");
 				
 			
@@ -1468,7 +1446,11 @@ var canvas_MCDU_base = {
 			if (atsu.ATISInstances[0].station != nil) {	
 				me["Simple_L1"].setText(" " ~ atsu.ATISInstances[0].station ~ "/" ~ (atsu.ATISInstances[0].type == 0 ? "ARR" : "DEP"));
 				me["Simple_L1"].setFont(default);
-				me["Simple_L1_Arrow"].show();
+				if (atsu.ATISInstances[0].received) {
+					me["Simple_L1_Arrow"].show();
+				} else {
+					me["Simple_L1_Arrow"].hide();
+				}
 			} else {
 				me["Simple_L1"].setText(" [  ]/[  ]");
 				me["Simple_L1"].setFont(symbol);
@@ -1486,6 +1468,11 @@ var canvas_MCDU_base = {
 				me["Simple_L2"].setText(" " ~ atsu.ATISInstances[1].station ~ "/" ~ (atsu.ATISInstances[1].type == 0 ? "ARR" : "DEP"));
 				me["Simple_L2"].setFont(default);
 				me["Simple_L2_Arrow"].show();
+				if (atsu.ATISInstances[1].received) {
+					me["Simple_L2_Arrow"].show();
+				} else {
+					me["Simple_L2_Arrow"].hide();
+				}
 			} else {
 				me["Simple_L2"].setText(" [  ]/[  ]");
 				me["Simple_L2"].setFont(symbol);
@@ -1502,7 +1489,11 @@ var canvas_MCDU_base = {
 			if (atsu.ATISInstances[2].station != nil) {
 				me["Simple_L3"].setText(" " ~ atsu.ATISInstances[2].station ~ "/" ~ (atsu.ATISInstances[2].type == 0 ? "ARR" : "DEP"));
 				me["Simple_L3"].setFont(default);
-				me["Simple_L3_Arrow"].show();
+				if (atsu.ATISInstances[2].received) {
+					me["Simple_L3_Arrow"].show();
+				} else {
+					me["Simple_L3_Arrow"].hide();
+				}
 			} else {
 				me["Simple_L3"].setText(" [  ]/[  ]");
 				me["Simple_L3"].setFont(symbol);
@@ -1519,7 +1510,11 @@ var canvas_MCDU_base = {
 			if (atsu.ATISInstances[3].station != nil) {
 				me["Simple_L4"].setText(" " ~ atsu.ATISInstances[3].station ~ "/" ~ (atsu.ATISInstances[3].type == 0 ? "ARR" : "DEP"));
 				me["Simple_L4"].setFont(default);
-				me["Simple_L4_Arrow"].show();
+				if (atsu.ATISInstances[3].received) {
+					me["Simple_L4_Arrow"].show();
+				} else {
+					me["Simple_L4_Arrow"].hide();
+				}
 			} else {
 				me["Simple_L4"].setText(" [  ]/[  ]");
 				me["Simple_L4"].setFont(symbol);
@@ -1566,15 +1561,15 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("NOTIFICATION");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, -1, -1, -1, 1);
+				showLeft(me,1, 1, -1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, -1, -1, -1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(-1, 1, -1, -1, -1, -1);
-				me.showCenterS(-1, -1, -1, -1, -1, -1);
-				me.showRight(-1, 1, -1, -1, -1, 1);
-				me.showRightS(-1, -1, -1, -1, -1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
+				showLeftS(me,1, 1, -1, -1, -1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,-1, 1, -1, -1, -1, -1);
+				showCenterS(me,-1, -1, -1, -1, -1, -1);
+				showRight(me,-1, 1, -1, -1, -1, 1);
+				showRightS(me,-1, -1, -1, -1, -1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1655,15 +1650,15 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("CONNECTION STATUS");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, -1, 1, -1, 1);
+				showLeft(me,1, 1, -1, 1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, -1, -1, -1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(1, -1, -1, -1, -1, -1);
-				me.showCenterS(-1, -1, -1, 1, -1, -1);
-				me.showRight(1, -1, 1, -1, 1, 1);
-				me.showRightS(-1, -1, 1, -1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
+				showLeftS(me,1, 1, -1, -1, -1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,1, -1, -1, -1, -1, -1);
+				showCenterS(me,-1, -1, -1, 1, -1, -1);
+				showRight(me,1, -1, 1, -1, 1, 1);
+				showRightS(me,-1, -1, 1, -1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1730,13 +1725,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("COMM MENU");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, -1, -1, 1);
+				showLeft(me,1, 1, 1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, -1, -1, 1);
-				me.showLeftArrow(1, 1, 1, -1, -1, 1);
-				me.showRight(1, 1, -1, 1, -1, -1);
-				me.showRightS(1, 1, -1, -1, -1, -1);
-				me.showRightArrow(1, 1, -1, 1, -1, -1);
+				showLeftS(me,1, 1, 1, -1, -1, 1);
+				showLeftArrow(me,1, 1, 1, -1, -1, 1);
+				showRight(me,1, 1, -1, 1, -1, -1);
+				showRightS(me,1, 1, -1, -1, -1, -1);
+				showRightArrow(me,1, 1, -1, 1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1774,15 +1769,15 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("VHF3 VOICE DIRECTORY");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, -1, -1, 1, -1, 1);
+				showLeft(me,1, -1, -1, 1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, -1, -1, 1, -1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(-1, -1, -1, -1, -1, -1);
-				me.showCenterS(1, -1, -1, -1, -1, -1);
-				me.showRight(1, -1, -1, -1, 1, 1);
-				me.showRightS(1, -1, -1, -1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,1, -1, -1, 1, -1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,-1, -1, -1, -1, -1, -1);
+				showCenterS(me,1, -1, -1, -1, -1, -1);
+				showRight(me,1, -1, -1, -1, 1, 1);
+				showRightS(me,1, -1, -1, -1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1832,15 +1827,15 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("VHF3 DATA MODE");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, -1, -1, 1);
+				showLeft(me,1, 1, 1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, -1, -1, -1, -1, -1);
-				me.showLeftArrow(-1, 1, 1, -1, -1, 1);
-				me.showCenter(-1, -1, -1, -1, -1, -1);
-				me.showCenterS(1, -1, -1, -1, -1, -1);
-				me.showRight(1, 1, 1, -1, -1, 1);
-				me.showRightS(1, -1, -1, -1, -1, 1);
-				me.showRightArrow(-1, 1, 1, -1, -1, -1);
+				showLeftS(me,1, -1, -1, -1, -1, -1);
+				showLeftArrow(me,-1, 1, 1, -1, -1, 1);
+				showCenter(me,-1, -1, -1, -1, -1, -1);
+				showCenterS(me,1, -1, -1, -1, -1, -1);
+				showRight(me,1, 1, 1, -1, -1, 1);
+				showRightS(me,1, -1, -1, -1, -1, 1);
+				showRightArrow(me,-1, 1, 1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1893,13 +1888,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("COMM INIT");
 				me.defaultPageNumbers();
 				
-				me.showLeft(-1, 1, 1, 1, -1, 1);
+				showLeft(me,-1, 1, 1, 1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, 1, 1, 1, -1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(-1, -1, 1, -1, -1, 1);
-				me.showRightS(-1, -1, 1, -1, -1, 1);
-				me.showRightArrow(-1, -1, 1, -1, -1, -1);
+				showLeftS(me,-1, 1, 1, 1, -1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,-1, -1, 1, -1, -1, 1);
+				showRightS(me,-1, -1, 1, -1, -1, 1);
+				showRightArrow(me,-1, -1, 1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1938,13 +1933,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("COMM STATUS");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, -1, 1, 1, 1);
+				showLeft(me,1, 1, -1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, 1, 1, -1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(1, 1, -1, 1, 1, 1);
-				me.showRightS(-1, 1, 1, 1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,-1, 1, 1, -1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,1, 1, -1, 1, 1, 1);
+				showRightS(me,-1, 1, 1, 1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -1993,13 +1988,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("COMPANY CALL");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, -1, -1, -1, 1);
+				showLeft(me,1, 1, -1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, -1, -1, -1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(1, -1, -1, -1, -1, 1);
-				me.showRightS(1, -1, -1, -1, -1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,1, 1, -1, -1, -1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,1, -1, -1, -1, -1, 1);
+				showRightS(me,1, -1, -1, -1, -1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -2089,13 +2084,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText(sprintf("%s", "    " ~ acType.getValue()));
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, -1, -1, 1);
+				showLeft(me,1, 1, 1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, -1, -1, 1);
-				me.showLeftArrow(-1, -1, 1, -1, -1, -1);
-				me.showRight(-1, 1, -1, 1, 1, 1);
-				me.showRightS(-1, -1, -1, 1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
+				showLeftS(me,1, 1, 1, -1, -1, 1);
+				showLeftArrow(me,-1, -1, 1, -1, -1, -1);
+				showRight(me,-1, 1, -1, 1, 1, 1);
+				showRightS(me,-1, -1, -1, 1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -2135,9 +2130,9 @@ var canvas_MCDU_base = {
 			}
 			
 			me["Simple_L1"].setText(sprintf("%s", engType.getValue()));
-			me["Simple_L2"].setText(sprintf("%s", " " ~ database1.getValue()));
-			me["Simple_L3"].setText(sprintf("%s", " " ~ database2.getValue()));
-			me["Simple_R2"].setText(sprintf("%s", databaseCode.getValue() ~ " "));
+			me["Simple_L2"].setText(" " ~ fmgc.navDataBase.currentDate);
+			me["Simple_L3"].setText(" " ~ fmgc.navDataBase.standbyDate);
+			me["Simple_R2"].setText(fmgc.navDataBase.currentCode);
 			
 			if (fmgc.WaypointDatabase.getCount() >= 1) {
 				me["Simple_R4"].show();
@@ -2181,13 +2176,13 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(1, 1, 1, 1, -1, -1);
+				showLeft(me,1, 1, 1, 1, -1, -1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, -1, 1, -1);
-				me.showLeftArrow(1, 1, 1, 1, 1, -1);
-				me.showRight(-1, -1, -1, -1, 1, 1);
-				me.showRightS(-1, -1, -1, -1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, 1, 1);
+				showLeftS(me,1, 1, 1, -1, 1, -1);
+				showLeftArrow(me,1, 1, 1, 1, 1, -1);
+				showRight(me,-1, -1, -1, -1, 1, 1);
+				showRightS(me,-1, -1, -1, -1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, 1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -2221,13 +2216,13 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, 1, 1);
-				me.showLeftArrow(1, 1, 1, 1, 1, 1);
-				me.showRight(1, 1, 1, 1, -1, -1);
-				me.showRightS(1, 1, 1, 1, -1, -1);
-				me.showRightArrow(1, 1, 1, 1, -1, -1);
+				showLeftS(me,-1, -1, -1, -1, 1, 1);
+				showLeftArrow(me,1, 1, 1, 1, 1, 1);
+				showRight(me,1, 1, 1, 1, -1, -1);
+				showRightS(me,1, 1, 1, 1, -1, -1);
+				showRightArrow(me,1, 1, 1, 1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -2310,17 +2305,17 @@ var canvas_MCDU_base = {
 				me["Simple_Title2"].setColor(GREEN);
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, 1, 1, -1, 1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(-1, -1, -1, -1, 1, -1);
+				showLeftS(me,-1, 1, 1, -1, 1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,-1, -1, -1, -1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(-1, -1, -1, -1, 1, -1);
-				me.showRight(1, 1, 1, 1, 1, 1);
-				me.showRightS(-1, -1, -1, -1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
+				showCenterS(me,-1, -1, -1, -1, 1, -1);
+				showRight(me,1, 1, 1, 1, 1, 1);
+				showRightS(me,-1, -1, -1, -1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
 				
 				me.standardFontSize();
 				
@@ -2426,14 +2421,14 @@ var canvas_MCDU_base = {
 
 				me.defaultPageNumbers();
 
-				me.showLeft(1, 1, 1, -1, -1, -1);
-				me.showLeftS(-1, 1, 1, 1, -1, -1);
-				me.showLeftArrow(1, 1, 1, -1, -1, -1);
-				me.showCenter(-1, -1, -1, -1, -1, -1);
-				me.showCenterS(-1, -1, -1, -1, -1, -1);
-				me.showRight(-1, -1, -1, -1, -1, -1);
-				me.showRightS(1, 1, 1, 1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeft(me,1, 1, 1, -1, -1, -1);
+				showLeftS(me,-1, 1, 1, 1, -1, -1);
+				showLeftArrow(me,1, 1, 1, -1, -1, -1);
+				showCenter(me,-1, -1, -1, -1, -1, -1);
+				showCenterS(me,-1, -1, -1, -1, -1, -1);
+				showRight(me,-1, -1, -1, -1, -1, -1);
+				showRightS(me,1, 1, 1, 1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 
 				me["arrowsDepArr"].hide();
 				me["PERFAPPR"].hide();
@@ -2497,14 +2492,14 @@ var canvas_MCDU_base = {
 
 				me.defaultPageNumbers();
 
-				me.showLeft(1, 1, 1, 1, 1, 1);
-				me.showLeftS(1, 1, 1, 1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, -1);
-				me.showCenter(-1, 1, 1, -1, 1, 1);
-				me.showCenterS(-1, 1, 1, -1, 1, 1);
-				me.showRight(-1, 1, 1, -1, 1, 1);
-				me.showRightS(-1, 1, 1, -1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
+				showLeftS(me,1, 1, 1, 1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, -1);
+				showCenter(me,-1, 1, 1, -1, 1, 1);
+				showCenterS(me,-1, 1, 1, -1, 1, 1);
+				showRight(me,-1, 1, 1, -1, 1, 1);
+				showRightS(me,-1, 1, 1, -1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 
 				me["arrowsDepArr"].hide();
 				me["PERFAPPR"].hide();
@@ -2558,13 +2553,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("RADIO NAV");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, 1, 1, -1);
+				showLeft(me,1, 1, 1, 1, 1, -1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, 1, 1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, -1);
-				me.showRight(1, 1, 1, 1, 1, -1);
-				me.showRightS(1, 1, 1, 1, 1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,1, 1, 1, 1, 1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, -1);
+				showRight(me,1, 1, -1, -1, 1, -1);
+				showRightS(me,1, 1, -1, -1, 1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -2578,86 +2573,107 @@ var canvas_MCDU_base = {
 				
 				me.colorLeft("blu", "blu", "blu", "blu", "blu", "blu");
 				me.colorLeftS("wht", "wht", "wht", "wht", "wht", "wht");
-				me.colorLeftArrow("wht", "wht", "wht", "wht", "wht", "wht");
+				me.colorLeftArrow("wht", "wht", "wht", "wht", "wht", "blu");
 				me.colorCenter("wht", "wht", "wht", "wht", "wht", "grn");
 				me.colorCenterS("wht", "wht", "wht", "wht", "wht", "wht");
 				me.colorRight("blu", "blu", "blu", "blu", "blu", "blu");
 				me.colorRightS("wht", "wht", "wht", "wht", "wht", "wht");
-				me.colorRightArrow("wht", "wht", "wht", "wht", "wht", "wht");
+				me.colorRightArrow("wht", "wht", "wht", "wht", "wht", "blu");
 				
 				pageSwitch[i].setBoolValue(1);
 			}
 			
-			if (vor1FreqSet.getValue() == 1) {
+			if (fmgc.FMGCInternal.VOR1.freqSet) {
 				me["Simple_L1"].setFontSize(normal); 
 			} else {
 				me["Simple_L1"].setFontSize(small); 
 			}
-			if (vor1CRSSet.getValue() == 1) {
+			if (fmgc.FMGCInternal.VOR1.crsSet) {
 				me["Simple_L2"].setFontSize(normal); 
 			} else {
 				me["Simple_L2"].setFontSize(small); 
 			}
-			if (ils1FreqSet.getValue() == 1) {
+			if (fmgc.FMGCInternal.ILS.freqSet) {
 				me["Simple_L3"].setFontSize(normal); 
 			} else {
 				me["Simple_L3"].setFontSize(small); 
 			}
-			if (ils1CRSSet.getValue() == 1) {
+			if (fmgc.FMGCInternal.ILS.crsSet) {
 				me["Simple_L4"].setFontSize(normal); 
 			} else {
 				me["Simple_L4"].setFontSize(small); 
 			}
-			if (adf1FreqSet.getValue() == 1) {
+			
+			me["Simple_L6"].setText(" ADF1 BFO");
+			me["Simple_R6"].setText("ADF2 BFO ");
+			
+			if (fmgc.FMGCInternal.ADF1.freqSet) {
 				me["Simple_L5"].setFont(default); 
 				me["Simple_L5"].setFontSize(normal); 
-				me["Simple_L5"].setText(sprintf("%s", adf1.getValue()));
+				me["Simple_L5"].setText(sprintf(" %s", fmgc.FMGCInternal.ADF1.mcdu));
+				me["Simple_L6"].show();
+				
+				if (rmp.BFOActive[0].getValue()) {
+					# TODO - wrong arrow
+					me["Simple_L6_Arrow"].hide();
+				} else {
+					me["Simple_L6_Arrow"].show();
+				}
 			} else {
 				me["Simple_L5"].setFont(symbol); 
 				me["Simple_L5"].setFontSize(small); 
-				me["Simple_L5"].setText("[   ]/[     ]");
+				me["Simple_L5"].setText("[   ]/[    .]");
+				me["Simple_L6"].hide();
+				me["Simple_L6_Arrow"].hide();
 			}
 			
-			if (vor2FreqSet.getValue() == 1) {
+			if (fmgc.FMGCInternal.VOR2.freqSet) {
 				me["Simple_R1"].setFontSize(normal); 
 			} else {
 				me["Simple_R1"].setFontSize(small); 
 			}
-			if (vor2CRSSet.getValue() == 1) {
+			if (fmgc.FMGCInternal.VOR2.crsSet) {
 				me["Simple_R2"].setFontSize(normal); 
 			} else {
 				me["Simple_R2"].setFontSize(small); 
 			}
-			if (adf2FreqSet.getValue() == 1) {
+			
+			if (fmgc.FMGCInternal.ADF2.freqSet) {
 				me["Simple_R5"].setFont(default); 
 				me["Simple_R5"].setFontSize(normal); 
-				me["Simple_R5"].setText(sprintf("%s", adf2.getValue()));
+				me["Simple_R5"].setText(sprintf("%s ", fmgc.FMGCInternal.ADF2.mcdu));
+				me["Simple_R6"].show();
+				
+				if (rmp.BFOActive[1].getValue()) {
+					# TODO - wrong arrow
+					me["Simple_R6_Arrow"].hide();
+				} else {
+					me["Simple_R6_Arrow"].show();
+				}
 			} else {
 				me["Simple_R5"].setFont(symbol); 
 				me["Simple_R5"].setFontSize(small); 
-				me["Simple_R5"].setText("[     ]/[   ]");
+				me["Simple_R5"].setText("[    .]/[   ]");
+				me["Simple_R6"].hide();
+				me["Simple_R6_Arrow"].hide();
 			}
 			
-			me["Simple_L1"].setText(" " ~ vor1.getValue());
-			me["Simple_L2"].setText(sprintf("%3.0f", vor1CRS.getValue()));
-			me["Simple_L3"].setText(" " ~ ils1.getValue());
-			me["Simple_L4"].setText(sprintf("%3.0f", ils1CRS.getValue()));
+			me["Simple_L1"].setText(" " ~ fmgc.FMGCInternal.VOR1.mcdu);
+			me["Simple_L2"].setText(sprintf("%03.0f", pts.Instrumentation.Nav.Radials.selectedDeg[2].getValue()));
+			me["Simple_L3"].setText(" " ~ fmgc.FMGCInternal.ILS.mcdu);
+			me["Simple_L4"].setText(sprintf("%03.0f", pts.Instrumentation.Nav.Radials.selectedDeg[0].getValue()));
 			me["Simple_L1S"].setText("VOR1/FREQ");
 			me["Simple_L2S"].setText("CRS");
 			me["Simple_L3S"].setText("ILS /FREQ");
 			me["Simple_L4S"].setText("CRS");
 			me["Simple_L5S"].setText("ADF1/FREQ");
-			me["Simple_R1"].setText(" " ~ vor2.getValue());
-			me["Simple_R2"].setText(sprintf("%3.0f", vor2CRS.getValue()));
-			me["Simple_R3"].setText("[  ]/[   ]");
-			me["Simple_R4"].setText("-.-   [   ]");
+			me["Simple_R1"].setText(" " ~ fmgc.FMGCInternal.VOR2.mcdu);
+			me["Simple_R2"].setText(sprintf("%03.0f", pts.Instrumentation.Nav.Radials.selectedDeg[3].getValue()));
 			me["Simple_R1S"].setText("FREQ/VOR2");
 			me["Simple_R2S"].setText("CRS");
-			me["Simple_R3S"].setText("CHAN/ MLS");
-			me["Simple_R4S"].setText("SLOPE   CRS");
 			me["Simple_R5S"].setText("FREQ/ADF2");
 			
-			if (getprop("systems/radio/rmp[0]/nav") or getprop("systems/radio/rmp[1]/nav")) {
+			if (rmp.rmpNav[0].getValue() or rmp.rmpNav[1].getValue()) {
 				me["Simple_L1"].hide();
 				me["Simple_L2"].hide();
 				me["Simple_L3"].hide();
@@ -2665,8 +2681,6 @@ var canvas_MCDU_base = {
 				me["Simple_L5"].hide();
 				me["Simple_R1"].hide();
 				me["Simple_R2"].hide();
-				me["Simple_R3"].hide();
-				me["Simple_R4"].hide();
 				me["Simple_R5"].hide();
 			} else {
 				me["Simple_L1"].show();
@@ -2676,8 +2690,6 @@ var canvas_MCDU_base = {
 				me["Simple_L5"].show();
 				me["Simple_R1"].show();
 				me["Simple_R2"].show();
-				me["Simple_R3"].show();
-				me["Simple_R4"].show();
 				me["Simple_R5"].show();
 			}
 		} else if (page == "INITA") {
@@ -2704,13 +2716,13 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(0, 1, 0, -1, 0, 1);
+				showLeft(me,0, 1, 0, -1, 0, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, -1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, -1);
-				me.showRight(0, 0, 1, 1, 1, 1);
-				me.showRightS(1, 0, -1, -1, 1, 1);
-				me.showRightArrow(-1, -1, -1, 1, -1, -1);
+				showLeftS(me,1, 1, 1, -1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, -1);
+				showRight(me,0, 0, 1, 1, 1, 1);
+				showRightS(me,1, 0, -1, -1, 1, 1);
+				showRightArrow(me,-1, -1, -1, 1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
 				
@@ -2757,7 +2769,7 @@ var canvas_MCDU_base = {
 			if (!fmgc.FMGCInternal.toFromSet and !fmgc.FMGCInternal.crzSet) {
 				me["INITA_CruiseFLTemp"].hide();
 				me["Simple_L6"].setColor(WHITE);
-				me["Simple_L6"].setText("-----/---g");
+				me["Simple_L6"].setText("-----/---°");
 			} else if (fmgc.FMGCInternal.crzSet and fmgc.FMGCInternal.crzTempSet) {
 				me["INITA_CruiseFLTemp"].hide();
 				me["Simple_L6"].setColor(BLUE);
@@ -2771,7 +2783,7 @@ var canvas_MCDU_base = {
 			} else {
 				me["INITA_CruiseFLTemp"].show();
 				me["Simple_L6"].setColor(AMBER);
-				me["Simple_L6"].setText("         g");
+				me["Simple_L6"].setText("         °");
 			}
 
 			if (fmgc.FMGCInternal.coRouteSet) { # show coRoute when valid
@@ -2795,7 +2807,7 @@ var canvas_MCDU_base = {
 				} else {
 					me["Simple_L2"].setText("NONE");
 				}
-				me.showRight(1, -1, 0, 0, 0, 0);
+				showRight(me,1, -1, 0, 0, 0, 0);
 				me["Simple_R2S"].hide();
 				me["INITA_InitRequest"].hide();
 			} else {
@@ -2804,7 +2816,7 @@ var canvas_MCDU_base = {
 				me["Simple_L1"].hide();
 				me["Simple_L2"].setColor(WHITE);
 				me["Simple_L2"].setText("----/----------");
-				me.showRight(-1, 1, 0, 0, 0, 0);
+				showRight(me,-1, 1, 0, 0, 0, 0);
 				me["Simple_R2S"].show();
 				if (!Simbrief.SimbriefParser.inhibit) {
 					me["INITA_InitRequest"].show();
@@ -2815,11 +2827,11 @@ var canvas_MCDU_base = {
 			if (ADIRSMCDUBTN.getValue() != 1) {
 				me["INITA_AlignIRS"].show();
 				me["Simple_R3"].setColor(AMBER);
-				me.showRightArrow(0, 0, -1, 0, 0, 0);
+				showRightArrow(me,0, 0, -1, 0, 0, 0);
 			} else {
 				me["INITA_AlignIRS"].hide();
 				me["Simple_R3"].setColor(WHITE);
-				me.showRightArrow(0, 0, 1, 0, 0, 0);
+				showRightArrow(me,0, 0, 1, 0, 0, 0);
 			}
 			if (fmgc.FMGCInternal.tropoSet) {
 				me["Simple_R5"].setFontSize(normal); 
@@ -2877,17 +2889,17 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("IRS INIT");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, -1, -1, -1, 1);
+				showLeft(me,1, 1, -1, -1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, -1, -1, -1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(1, 1, -1, -1, -1, 1);
-				me.showRightS(1, 1, -1, -1, -1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(1, -1, 1, 1, 1, -1);
+				showLeftS(me,1, 1, -1, -1, -1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,1, 1, -1, -1, -1, 1);
+				showRightS(me,1, 1, -1, -1, -1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,1, -1, 1, 1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, 1, 1, 1, 1, -1);
+				showCenterS(me,1, 1, 1, 1, 1, -1);
 				
 				me.fontLeft(default, default, 0, 0, 0, default);
 				me.fontLeftS(default, default, 0, 0, 0, 0);
@@ -2962,24 +2974,24 @@ var canvas_MCDU_base = {
 			degrees = int(dms);
 			minutes = sprintf("%.1f",abs((dms - degrees) * 60));
 			sign = degrees >= 0 ? "N" : "S";
-			me["Simple_L2"].setText(abs(degrees) ~ "g" ~ minutes ~ " " ~ sign);
+			me["Simple_L2"].setText(abs(degrees) ~ "°" ~ minutes ~ " " ~ sign);
 			dms2 = getprop("/position/longitude-deg");
 			degrees2 = int(dms2);
 			minutes2 = sprintf("%.1f",abs((dms2 - degrees2) * 60));
 			sign2 = degrees2 >= 0 ? "E" : "W";
-			me["Simple_R2"].setText(abs(degrees2) ~ "g" ~ minutes2 ~ " " ~ sign2);
+			me["Simple_R2"].setText(abs(degrees2) ~ "°" ~ minutes2 ~ " " ~ sign2);
 			if (systems.ADIRS.ADIRunits[0].operative and getprop("/FMGC/internal/align1-done")) {
-				me["Simple_C3"].setText(abs(degrees) ~ "g" ~ minutes ~ " " ~ sign ~ "/" ~ abs(degrees2) ~ "g" ~ minutes2 ~ " " ~ sign2);
+				me["Simple_C3"].setText(abs(degrees) ~ "°" ~ minutes ~ " " ~ sign ~ "/" ~ abs(degrees2) ~ "°" ~ minutes2 ~ " " ~ sign2);
 			} else {
 				me["Simple_C3"].setText("-----.--/-----.--");
 			}
 			if (systems.ADIRS.ADIRunits[1].operative and getprop("/FMGC/internal/align2-done")) {
-				me["Simple_C4"].setText(abs(degrees) ~ "g" ~ minutes ~ " " ~ sign ~ "/" ~ abs(degrees2) ~ "g" ~ minutes2 ~ " " ~ sign2);
+				me["Simple_C4"].setText(abs(degrees) ~ "°" ~ minutes ~ " " ~ sign ~ "/" ~ abs(degrees2) ~ "°" ~ minutes2 ~ " " ~ sign2);
 			} else {
 				me["Simple_C4"].setText("-----.--/-----.--");
 			}
 			if (systems.ADIRS.ADIRunits[2].operative and getprop("/FMGC/internal/align3-done")) {
-				me["Simple_C5"].setText(abs(degrees) ~ "g" ~ minutes ~ " " ~ sign ~ "/" ~ abs(degrees2) ~ "g" ~ minutes2 ~ " " ~ sign2);
+				me["Simple_C5"].setText(abs(degrees) ~ "°" ~ minutes ~ " " ~ sign ~ "/" ~ abs(degrees2) ~ "°" ~ minutes2 ~ " " ~ sign2);
 			} else {
 				me["Simple_C5"].setText("-----.--/-----.--");
 			}
@@ -2988,11 +3000,11 @@ var canvas_MCDU_base = {
 				me["Simple_R6"].setText("CONFIRM ALIGN ");
 				me.colorRight("ack", "ack", "ack", "ack", "ack", "amb");
 				me["IRSINIT_star"].show();
-				me.showRightArrow(0, 0, 0, 0, 0, -1);
+				showRightArrow(me,0, 0, 0, 0, 0, -1);
 			} else {
 				me["Simple_R6"].setText("ALIGN ON REF ");
 				me["IRSINIT_star"].hide();
-				me.showRightArrow(0, 0, 0, 0, 0, 1);
+				showRightArrow(me,0, 0, 0, 0, 0, 1);
 			}
 			
 			if (systems.ADIRS.Operating.aligned[0].getValue()) {
@@ -3042,13 +3054,13 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("ROUTE SELECTION");
 				me.showPageNumbers(1,1);
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, 1, 1, 1, 1, -1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(-1, 1, 1, 1, 1, 1);
-				me.showRightS(-1, 1, 1, 1, 1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showLeftS(me,-1, 1, 1, 1, 1, -1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,-1, 1, 1, 1, 1, 1);
+				showRightS(me,-1, 1, 1, 1, 1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				me.fontSizeLeftS(normal, normal, normal, normal, normal, normal);
 				me.fontSizeRight(0, small, small, small, small, normal);
 				me.fontSizeRightS(0, small, small, small, small, normal);
@@ -3114,17 +3126,17 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, 1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, -1);
-				me.showCenter(1, -1, 1, 1, 1, -1);
+				showLeftS(me,1, 1, 1, 1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, -1);
+				showCenter(me,1, -1, 1, 1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(-1, -1, -1, -1, -1, -1);
-				me.showRight(-1, 1, 1, 1, 1, 1);
-				me.showRightS(1, 1, 1, 1, 1, 1);
-				me.showRightArrow(-1, -1, 1, -1, -1, -1);
+				showCenterS(me,-1, -1, -1, -1, -1, -1);
+				showRight(me,-1, 1, 1, 1, 1, 1);
+				showRightS(me,1, 1, 1, 1, 1, 1);
+				showRightArrow(me,-1, -1, 1, -1, -1, -1);
 				
 				me.fontLeft(default, default, default, default, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -3564,17 +3576,17 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].show();
 				me["ArrowRight"].show();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, -1, 1, 1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, -1);
-				me.showCenter(1, 1, 1, -1, 1, -1);
+				showLeftS(me,1, -1, 1, 1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, -1);
+				showCenter(me,1, 1, 1, -1, 1, -1);
 				me["Simple_C3B"].show();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, -1, -1, -1, -1, -1);
-				me.showRight(1, 1, -1, 1, 1, 1);
-				me.showRightS(1, -1, 1, 1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
+				showCenterS(me,1, -1, -1, -1, -1, -1);
+				showRight(me,1, 1, -1, 1, 1, 1);
+				showRightS(me,1, -1, 1, 1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
 				
 				me.fontLeft(default, default, default, default, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -3905,17 +3917,17 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].hide();
 				me["ArrowRight"].hide();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, -1, 1, 1, 1, 1);
-				me.showLeftArrow(-1, 1, -1, -1, 1, -1);
-				me.showRight(1, -1, -1, 1, 1, 1);
-				me.showRightS(1, -1, -1, -1, -1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
-				me.showCenter(1, -1, -1, 1, -1, 1);
+				showLeftS(me,1, -1, 1, 1, 1, 1);
+				showLeftArrow(me,-1, 1, -1, -1, 1, -1);
+				showRight(me,1, -1, -1, 1, 1, 1);
+				showRightS(me,1, -1, -1, -1, -1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
+				showCenter(me,1, -1, -1, 1, -1, 1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, -1, -1, -1, -1, 1);
+				showCenterS(me,1, -1, -1, -1, -1, 1);
 				
 				me.fontLeft(default, default, symbol, default, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -3941,13 +3953,13 @@ var canvas_MCDU_base = {
 				me.colorCenterS("wht", "wht", "wht", "wht", "wht", "wht");
 
 				if (page == "PROGCRZ") {
-					me.showLeftS(0, 0, -1, 0, 0, 0);
-					me.showCenterS(0, 0, 1, 0, 0, 0);
-					#me.showRight(0, 0, 1, 0, 0, 0); #Add when implement cruise phase
+					showLeftS(me,0, 0, -1, 0, 0, 0);
+					showCenterS(me,0, 0, 1, 0, 0, 0);
+					#showRight(me,0, 0, 1, 0, 0, 0); #Add when implement cruise phase
 					me.fontLeft(0, 0, default, 0, 0, 0);
 				} else if (page == "PROGDES" or page == "PROGAPPR") {
-					me.showCenter(0, 1, 0, 0, 0, 0);
-					me.showRight(0, 1, 0, 0, 0, 0);		
+					showCenter(me,0, 1, 0, 0, 0, 0);
+					showRight(me,0, 1, 0, 0, 0, 0);		
 					#me["Simple_C2"].setFontSize(normal);			
 					#me["Simple_R2"].setFontSize(normal);			
 				} 
@@ -3961,7 +3973,7 @@ var canvas_MCDU_base = {
 				#	me["Simple_R5S"].show();
 				#	me["Simple_R5"].setFontSize(small);
 				#	me["Simple_R5"].setColor(WHITE);	
-				#	me.showLeftArrow(-1, 1, -1, -1, -1, -1);				
+				#	showLeftArrow(me,-1, 1, -1, -1, -1, -1);				
 				#}
 				
 				pageSwitch[i].setBoolValue(1);
@@ -4071,17 +4083,17 @@ var canvas_MCDU_base = {
 				me["ArrowLeft"].hide();
 				me["ArrowRight"].hide();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, 1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(-1, 1, 1, 1, 1, 1);
-				me.showRightS(1, 1, 1, 1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(1, 1, 1, -1, -1, -1);
+				showLeftS(me,1, 1, 1, 1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,-1, 1, 1, 1, 1, 1);
+				showRightS(me,1, 1, 1, 1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,1, 1, 1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, 1, 1, -1, -1, -1);
+				showCenterS(me,1, 1, 1, -1, -1, -1);
 				
 				me.fontLeft(default, default, default, default, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -4245,17 +4257,17 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("CLB");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, 1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, 1, 1);
-				me.showRight(-1, 1, 1, 1, -1, 1);
-				me.showRightS(-1, -1, 1, -1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(-1, 1, 1, 1, -1, -1);
+				showLeftS(me,1, 1, 1, 1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, 1, 1);
+				showRight(me,-1, 1, 1, 1, -1, 1);
+				showRightS(me,-1, -1, 1, -1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,-1, 1, 1, 1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(-1, -1, 1, -1, 1, -1);
+				showCenterS(me,-1, -1, 1, -1, 1, -1);
 				
 				me.fontLeft(default, default, default, symbol, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -4282,20 +4294,20 @@ var canvas_MCDU_base = {
 			
 			if (fmgc.FMGCInternal.phase == 2) {
 				me["Simple_Title"].setColor(GREEN);
-				me.showLeft(0, 0, 0, 0, 1, 0);
-				me.showLeftS(0, 0, 0, 0, 1, 0);
-				me.showLeftArrow(0, 0, 0, 0, 1, 1);
-				me.showRight(0, 0, 0, 1, 0, 0);
-				me.showRightS(0, 0, 0, 0, 1, 0);
-				me.showCenterS(0, 0, 0, 0, 1, 0);
+				showLeft(me,0, 0, 0, 0, 1, 0);
+				showLeftS(me,0, 0, 0, 0, 1, 0);
+				showLeftArrow(me,0, 0, 0, 0, 1, 1);
+				showRight(me,0, 0, 0, 1, 0, 0);
+				showRightS(me,0, 0, 0, 0, 1, 0);
+				showCenterS(me,0, 0, 0, 0, 1, 0);
 				
 				if (managedSpeed.getValue() == 1) {
-					me.showLeft(0, 0, 0, -1, 0, 0);
-					me.showLeftS(0, 0, 0, -1, 0, 0);
+					showLeft(me,0, 0, 0, -1, 0, 0);
+					showLeftS(me,0, 0, 0, -1, 0, 0);
 				} else {
 					me["Simple_L4S"].setText(" SELECTED");
-					me.showLeft(0, 0, 0, 1, 0, 0);
-					me.showLeftS(0, 0, 0, 1, 0, 0);
+					showLeft(me,0, 0, 0, 1, 0, 0);
+					showLeftS(me,0, 0, 0, 1, 0, 0);
 				}
 				
 				if (activate_once.getValue() == 0 and activate_twice.getValue() == 0) {
@@ -4316,19 +4328,19 @@ var canvas_MCDU_base = {
 					me.colorLeft("ack", "ack", "ack", "ack", "ack", "blu");
 					me.colorLeftS("ack", "ack", "ack", "ack", "ack", "blu");
 					me.colorLeftArrow("ack", "ack", "ack", "ack", "ack", "blu");
-					me.showLeftArrow(0, 0, 0, 0, 0, -1);
+					showLeftArrow(me,0, 0, 0, 0, 0, -1);
 				} else {
 					setprop("/FMGC/internal/activate-once", 0);
 					setprop("/FMGC/internal/activate-twice", 0);
 				}
 			} else {
 				me["Simple_Title"].setColor(WHITE);
-				me.showLeft(0, 0, 0, 0, -1, 0);
-				me.showLeftS(0, 0, 0, 0, -1, 0);
-				me.showLeftArrow(0, 0, 0, 0, -1, 0);
-				me.showRight(0, 0, 0, -1, 0, 0);
-				me.showRightS(0, 0, 0, 0, -1, 0);
-				me.showCenterS(0, 0, 0, 0, -1, 0);
+				showLeft(me,0, 0, 0, 0, -1, 0);
+				showLeftS(me,0, 0, 0, 0, -1, 0);
+				showLeftArrow(me,0, 0, 0, 0, -1, 0);
+				showRight(me,0, 0, 0, -1, 0, 0);
+				showRightS(me,0, 0, 0, 0, -1, 0);
+				showCenterS(me,0, 0, 0, 0, -1, 0);
 				
 				me.colorLeft("ack", "ack", "ack", "ack", "ack", "wht");
 				me.colorLeftS("ack", "ack", "ack", "ack", "ack", "wht");
@@ -4400,17 +4412,17 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("CRZ");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, 1, -1, 1);
+				showLeft(me,1, 1, 1, 1, -1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, 1, -1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(1, -1, -1, -1, 1, 1);
-				me.showRightS(1, -1, -1, -1, 1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(1, -1, -1, -1, 1, -1);
+				showLeftS(me,1, 1, 1, 1, -1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,1, -1, -1, -1, 1, 1);
+				showRightS(me,1, -1, -1, -1, 1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,1, -1, -1, -1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, -1, -1, -1, -1, -1);
+				showCenterS(me,1, -1, -1, -1, -1, -1);
 				
 				me.fontLeft(default, default, default, symbol, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -4438,12 +4450,12 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setColor(GREEN);
 
 				if (managedSpeed.getValue() == 1) {
-					me.showLeft(0, 0, 0, -1, 0, 0);
-					me.showLeftS(0, 0, 0, -1, 0, 0);
+					showLeft(me,0, 0, 0, -1, 0, 0);
+					showLeftS(me,0, 0, 0, -1, 0, 0);
 				} else {
 					me["Simple_L4S"].setText(" SELECTED");
-					me.showLeft(0, 0, 0, 1, 0, 0);
-					me.showLeftS(0, 0, 0, 1, 0, 0);
+					showLeft(me,0, 0, 0, 1, 0, 0);
+					showLeftS(me,0, 0, 0, 1, 0, 0);
 				}
 				
 				if (activate_once.getValue() == 0 and activate_twice.getValue() == 0) {
@@ -4464,7 +4476,7 @@ var canvas_MCDU_base = {
 					me.colorLeft("ack", "ack", "ack", "ack", "ack", "blu");
 					me.colorLeftS("ack", "ack", "ack", "ack", "ack", "blu");
 					me.colorLeftArrow("ack", "ack", "ack", "ack", "ack", "blu");
-					me.showLeftArrow(0, 0, 0, 0, 0, -1);
+					showLeftArrow(me,0, 0, 0, 0, 0, -1);
 				} else {
 					setprop("/FMGC/internal/activate-once", 0);
 					setprop("/FMGC/internal/activate-twice", 0);
@@ -4537,17 +4549,17 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("DES");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(1, 1, 1, 1, -1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(1, 1, -1, 1, -1, 1);
-				me.showRightS(1, -1, 1, -1, -1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(1, 1, -1, 1, 1, -1);
+				showLeftS(me,1, 1, 1, 1, -1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,1, 1, -1, 1, -1, 1);
+				showRightS(me,1, -1, 1, -1, -1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,1, 1, -1, 1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, -1, 1, -1, -1, -1);
+				showCenterS(me,1, -1, 1, -1, -1, -1);
 				
 				me.fontLeft(default, default, default, symbol, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -4574,19 +4586,19 @@ var canvas_MCDU_base = {
 			
 			if (fmgc.FMGCInternal.phase == 4) {
 				me["Simple_Title"].setColor(GREEN);
-				me.showLeft(0, 0, 0, 0, 1, 0);
-				me.showRight(0, 1, 0, 1, 0, 0);
-				me.showRightS(0, 0, 1, 0, 0, 0);
-				me.showCenter(0, 1, 0, 1, 1, 0);
-				me.showCenterS(0, 0, 1, 0, 0, 0);
+				showLeft(me,0, 0, 0, 0, 1, 0);
+				showRight(me,0, 1, 0, 1, 0, 0);
+				showRightS(me,0, 0, 1, 0, 0, 0);
+				showCenter(me,0, 1, 0, 1, 1, 0);
+				showCenterS(me,0, 0, 1, 0, 0, 0);
 
 				if (managedSpeed.getValue() == 1) {
-					me.showLeft(0, 0, 0, -1, 0, 0);
-					me.showLeftS(0, 0, 0, -1, 0, 0);
+					showLeft(me,0, 0, 0, -1, 0, 0);
+					showLeftS(me,0, 0, 0, -1, 0, 0);
 				} else {
 					me["Simple_L4S"].setText(" SELECTED");
-					me.showLeft(0, 0, 0, 1, 0, 0);
-					me.showLeftS(0, 0, 0, 1, 0, 0);
+					showLeft(me,0, 0, 0, 1, 0, 0);
+					showLeftS(me,0, 0, 0, 1, 0, 0);
 				}
 				
 				if (activate_once.getValue() == 0 and activate_twice.getValue() == 0) {
@@ -4607,18 +4619,18 @@ var canvas_MCDU_base = {
 					me.colorLeft("ack", "ack", "ack", "ack", "ack", "blu");
 					me.colorLeftS("ack", "ack", "ack", "ack", "ack", "blu");
 					me.colorLeftArrow("ack", "ack", "ack", "ack", "ack", "blu");
-					me.showLeftArrow(0, 0, 0, 0, 0, -1);
+					showLeftArrow(me,0, 0, 0, 0, 0, -1);
 				} else {
 					setprop("/FMGC/internal/activate-once", 0);
 					setprop("/FMGC/internal/activate-twice", 0);
 				}
 			} else {
 				me["Simple_Title"].setColor(WHITE);
-				me.showLeft(0, 0, 0, 0, -1, 0);
-				me.showRight(0, -1, 0, -1, 0, 0);
-				me.showRightS(0, 0, -1, 0, 0, 0);
-				me.showCenter(0, -1, 0, -1, -1, 0);
-				me.showCenterS(0, 0, -1, 0, 0, 0);
+				showLeft(me,0, 0, 0, 0, -1, 0);
+				showRight(me,0, -1, 0, -1, 0, 0);
+				showRightS(me,0, 0, -1, 0, 0, 0);
+				showCenter(me,0, -1, 0, -1, -1, 0);
+				showCenterS(me,0, 0, -1, 0, 0, 0);
 				
 				me.colorLeft("ack", "ack", "ack", "ack", "ack", "wht");
 				me.colorLeftS("ack", "ack", "ack", "ack", "ack", "wht");
@@ -4696,17 +4708,17 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("APPR");
 				me.defaultPageNumbers();
 				
-				me.showLeft(1, 1, 1, 1, 1, 1);
+				showLeft(me,1, 1, 1, 1, 1, 1);
 				me["Simple_L0S"].show();
-				me.showLeftS(1, 1, 1, 1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(1, 1, 1, 1, 1, 1);
-				me.showRightS(1, 1, 1, 1, -1, 1);
-				me.showRightArrow(-1, -1, -1, -1, -1, 1);
-				me.showCenter(1, 1, 1, -1, 1, -1);
+				showLeftS(me,1, 1, 1, 1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,1, 1, 1, 1, 1, 1);
+				showRightS(me,1, 1, 1, 1, -1, 1);
+				showRightArrow(me,-1, -1, -1, -1, -1, 1);
+				showCenter(me,1, 1, 1, -1, 1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, 1, 1, -1, 1, -1);
+				showCenterS(me,1, 1, 1, -1, 1, -1);
 				
 				me.fontLeft(symbol, default, default, default, symbol, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -4751,23 +4763,23 @@ var canvas_MCDU_base = {
 			
 			me["Simple_L2S"].setText("TEMP");
 			if (dest_temp.getValue() != -999) {
-				me["Simple_L2"].setText(sprintf("%3.0fg", dest_temp.getValue()));
+				me["Simple_L2"].setText(sprintf("%3.0f°", dest_temp.getValue()));
 			} else {
-				me["Simple_L2"].setText("---g");
+				me["Simple_L2"].setText("---°");
 			}
 			
 			me["Simple_L3S"].setText("MAG WIND");
 			if (fmgc.FMGCInternal.destMagSet and fmgc.FMGCInternal.destWindSet) {
-				me["Simple_L3"].setText(sprintf("%03.0fg", fmgc.FMGCInternal.destMag) ~ sprintf("/%.0f", fmgc.FMGCInternal.destWind));
+				me["Simple_L3"].setText(sprintf("%03.0f°", fmgc.FMGCInternal.destMag) ~ sprintf("/%.0f", fmgc.FMGCInternal.destWind));
 				me["Simple_L3"].setFontSize(normal);
 			} else {
 				me["Simple_L3"].setFontSize(small);
 				if (myDESWIND[i] != nil and myDESWIND[i].returnGRND() != nil) {
 					var result = myDESWIND[i].returnGRND();
-					me["Simple_L3"].setText(sprintf("%03.0fg", result[0]) ~ sprintf("/%.0f", result[1]));
+					me["Simple_L3"].setText(sprintf("%03.0f°", result[0]) ~ sprintf("/%.0f", result[1]));
 				} else if (myDESWIND[math.abs(i-1)] != nil and myDESWIND[math.abs(i-1)].returnGRND() != nil) {
 					var result = myDESWIND[math.abs(i-1)].returnGRND();
-					me["Simple_L3"].setText(sprintf("%03.0fg", result[0]) ~ sprintf("/%.0f", result[1]));
+					me["Simple_L3"].setText(sprintf("%03.0f°", result[0]) ~ sprintf("/%.0f", result[1]));
 				} else {
 					me["Simple_L3"].setText("---g/---");
 				}
@@ -4880,17 +4892,17 @@ var canvas_MCDU_base = {
 				me["Simple_Title"].setText("GO AROUND");
 				me.defaultPageNumbers();
 				
-				me.showLeft(-1, -1, -1, -1, 1, 1);
+				showLeft(me,-1, -1, -1, -1, 1, 1);
 				me["Simple_L0S"].hide();
-				me.showLeftS(-1, -1, -1, -1, 1, 1);
-				me.showLeftArrow(-1, -1, -1, -1, -1, 1);
-				me.showRight(-1, -1, -1, -1, 1, -1);
-				me.showRightS(-1, -1, -1, -1, 1, -1);
-				me.showRightArrow(-1, -1, -1, -1, -1, -1);
-				me.showCenter(1, 1, 1, -1, -1, -1);
+				showLeftS(me,-1, -1, -1, -1, 1, 1);
+				showLeftArrow(me,-1, -1, -1, -1, -1, 1);
+				showRight(me,-1, -1, -1, -1, 1, -1);
+				showRightS(me,-1, -1, -1, -1, 1, -1);
+				showRightArrow(me,-1, -1, -1, -1, -1, -1);
+				showCenter(me,1, 1, 1, -1, -1, -1);
 				me["Simple_C3B"].hide();
 				me["Simple_C4B"].hide();
-				me.showCenterS(1, 1, 1, -1, -1, -1);
+				showCenterS(me,1, 1, 1, -1, -1, -1);
 				
 				me.fontLeft(default, default, default, default, default, default);
 				me.fontLeftS(default, default, default, default, default, default);
@@ -5209,6 +5221,12 @@ var canvas_MCDU_base = {
 					me.dynamicPageFunc(myVertRev[i].R6, "Simple_R6");
 					
 					me.colorRight(myVertRev[i].R1[2],myVertRev[i].R2[2],myVertRev[i].R3[2],myVertRev[i].R4[2],myVertRev[i].R5[2],myVertRev[i].R6[2]);
+				}
+				
+				if (myVertRev[i] != nil and (myVertRev[i].type == 1 and fmgc.FMGCInternal.desSpdLimSet) or (myVertRev[i].type != 1 and fmgc.FMGCInternal.clbSpdLimSet)) {
+					me["Simple_L2"].setFontSize(normal);
+				} else {
+					me["Simple_L2"].setFontSize(small);
 				}
 				pageSwitch[i].setBoolValue(1);
 			}
@@ -5854,359 +5872,6 @@ var canvas_MCDU_base = {
 		}
 		if (f != "ack") {
 			me["Simple_C6S"].setColor(getprop("/MCDUC/colors/" ~ f ~ "/r"), getprop("/MCDUC/colors/" ~ f ~ "/g"), getprop("/MCDUC/colors/" ~ f ~ "/b"));
-		}
-	},
-	# -1 = hide, 0 = ignore, 1 = show
-	showLeft: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_L1"].show(); 
-			} else {
-				me["Simple_L1"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_L2"].show(); 
-			} else {
-				me["Simple_L2"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_L3"].show(); 
-			} else {
-				me["Simple_L3"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_L4"].show(); 
-			} else {
-				me["Simple_L4"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_L5"].show(); 
-			} else {
-				me["Simple_L5"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_L6"].show(); 
-			} else {
-				me["Simple_L6"].hide(); 
-			}
-		}
-	},
-	showLeftS: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_L1S"].show(); 
-			} else {
-				me["Simple_L1S"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_L2S"].show(); 
-			} else {
-				me["Simple_L2S"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_L3S"].show(); 
-			} else {
-				me["Simple_L3S"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_L4S"].show(); 
-			} else {
-				me["Simple_L4S"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_L5S"].show(); 
-			} else {
-				me["Simple_L5S"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_L6S"].show(); 
-			} else {
-				me["Simple_L6S"].hide(); 
-			}
-		}
-	},
-	showLeftArrow: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_L1_Arrow"].show(); 
-			} else {
-				me["Simple_L1_Arrow"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_L2_Arrow"].show(); 
-			} else {
-				me["Simple_L2_Arrow"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_L3_Arrow"].show(); 
-			} else {
-				me["Simple_L3_Arrow"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_L4_Arrow"].show(); 
-			} else {
-				me["Simple_L4_Arrow"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_L5_Arrow"].show(); 
-			} else {
-				me["Simple_L5_Arrow"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_L6_Arrow"].show(); 
-			} else {
-				me["Simple_L6_Arrow"].hide(); 
-			}
-		}
-	},
-	showRight: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_R1"].show(); 
-			} else {
-				me["Simple_R1"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_R2"].show(); 
-			} else {
-				me["Simple_R2"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_R3"].show(); 
-			} else {
-				me["Simple_R3"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_R4"].show(); 
-			} else {
-				me["Simple_R4"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_R5"].show(); 
-			} else {
-				me["Simple_R5"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_R6"].show(); 
-			} else {
-				me["Simple_R6"].hide(); 
-			}
-		}
-	},
-	showRightS: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_R1S"].show(); 
-			} else {
-				me["Simple_R1S"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_R2S"].show(); 
-			} else {
-				me["Simple_R2S"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_R3S"].show(); 
-			} else {
-				me["Simple_R3S"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_R4S"].show(); 
-			} else {
-				me["Simple_R4S"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_R5S"].show(); 
-			} else {
-				me["Simple_R5S"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_R6S"].show(); 
-			} else {
-				me["Simple_R6S"].hide(); 
-			}
-		}
-	},
-	showRightArrow: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_R1_Arrow"].show(); 
-			} else {
-				me["Simple_R1_Arrow"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_R2_Arrow"].show(); 
-			} else {
-				me["Simple_R2_Arrow"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_R3_Arrow"].show(); 
-			} else {
-				me["Simple_R3_Arrow"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_R4_Arrow"].show(); 
-			} else {
-				me["Simple_R4_Arrow"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_R5_Arrow"].show(); 
-			} else {
-				me["Simple_R5_Arrow"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_R6_Arrow"].show(); 
-			} else {
-				me["Simple_R6_Arrow"].hide(); 
-			}
-		}
-	},
-	showCenter: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_C1"].show(); 
-			} else {
-				me["Simple_C1"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_C2"].show(); 
-			} else {
-				me["Simple_C2"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_C3"].show(); 
-			} else {
-				me["Simple_C3"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_C4"].show(); 
-			} else {
-				me["Simple_C4"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_C5"].show(); 
-			} else {
-				me["Simple_C5"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_C6"].show(); 
-			} else {
-				me["Simple_C6"].hide(); 
-			}
-		}
-	},
-	showCenterS: func (a, b, c, d, e, f) {
-		if (a != 0) {
-			if (a >= 1) {
-				me["Simple_C1S"].show(); 
-			} else {
-				me["Simple_C1S"].hide(); 
-			}
-		}
-		if (b != 0) {
-			if (b >= 1) {
-				me["Simple_C2S"].show(); 
-			} else {
-				me["Simple_C2S"].hide(); 
-			}
-		}
-		if (c != 0) {
-			if (c >= 1) {
-				me["Simple_C3S"].show(); 
-			} else {
-				me["Simple_C3S"].hide(); 
-			}
-		}
-		if (d != 0) {
-			if (d >= 1) {
-				me["Simple_C4S"].show(); 
-			} else {
-				me["Simple_C4S"].hide(); 
-			}
-		}
-		if (e != 0) {
-			if (e >= 1) {
-				me["Simple_C5S"].show(); 
-			} else {
-				me["Simple_C5S"].hide(); 
-			}
-		}
-		if (f != 0) {
-			if (f >= 1) {
-				me["Simple_C6S"].show(); 
-			} else {
-				me["Simple_C6S"].hide(); 
-			}
 		}
 	},
 	# 0 = ignore
